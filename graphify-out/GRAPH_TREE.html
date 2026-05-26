@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IMS — graphify tree viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin: 20px 0 0 24px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #1e3a56;
+    }
+    .controls {
+      margin: 20px 0 15px 24px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 18px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:active {
+      background: #004085;
+    }
+    #tree-container {
+      width: calc(100vw - 48px); /* Adjust for body margin/padding */
+      height: 85vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #fff;
+      margin-left: 24px;
+      margin-right: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+    }
+    svg {
+      background: #fff;
+      border-radius: 8px;
+      display: block; /* Important for D3 */
+    }
+    .node circle {
+      stroke-width: 2.5px;
+    }
+    .node text { /* Base style for the <text> container */
+      font: 13px 'Segoe UI', sans-serif;
+      paint-order: stroke fill; /* Ensures text is readable over lines */
+      stroke: #fff; /* White halo */
+      stroke-width: 3px; /* Halo thickness */
+      stroke-linejoin: round;
+      stroke-opacity: 0.85; /* Halo opacity */
+    }
+    .link {
+      fill: none;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>IMS — Knowledge Graph</h1>
+  <div class="controls">
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <button onclick="resetView()">Reset View</button>
+  </div>
+  <div id="tree-container">
+    <svg id="tree-svg" width="6000" height="8000"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const initialJsonData = {"name":"IMS","total_count":810,"children":[{"name":"20260521_0001_auth_tables.py","total_count":2,"children":[{"name":"downgrade()","total_count":1,"children":[]},{"name":"upgrade()","total_count":1,"children":[]}]},{"name":"20260521_0002_product_inventory.py","total_count":2,"children":[{"name":"downgrade()","total_count":1,"children":[]},{"name":"upgrade()","total_count":1,"children":[]}]},{"name":"20260522_0003_user_management_indexes.py","total_count":2,"children":[{"name":"downgrade()","total_count":1,"children":[]},{"name":"upgrade()","total_count":1,"children":[]}]},{"name":"20260522_0004_procurement.py","total_count":2,"children":[{"name":"downgrade()","total_count":1,"children":[]},{"name":"upgrade()","total_count":1,"children":[]}]},{"name":"api.ts","total_count":2,"children":[{"name":"api","total_count":1,"children":[]},{"name":"ApiEnvelope","total_count":1,"children":[]}]},{"name":"App.tsx","total_count":2,"children":[{"name":"App()","total_count":1,"children":[]},{"name":"queryClient","total_count":1,"children":[]}]},{"name":"AppLayout.tsx","total_count":1,"children":[{"name":"AppLayout()","total_count":1,"children":[]}]},{"name":"appNavigation.ts","total_count":5,"children":[{"name":"getRouteLabel()","total_count":1,"children":[]},{"name":"getVisibleNavigationGroups()","total_count":1,"children":[]},{"name":"NavigationGroup","total_count":1,"children":[]},{"name":"navigationGroups","total_count":1,"children":[]},{"name":"NavigationItem","total_count":1,"children":[]}]},{"name":"AppShell.tsx","total_count":1,"children":[{"name":"AppShell()","total_count":1,"children":[]}]},{"name":"architecture.md","total_count":2,"children":[{"name":"Architecture","total_count":1,"children":[]},{"name":"architecture.md","total_count":1,"children":[]}]},{"name":"auth-api.ts","total_count":13,"children":[{"name":"AuthResponse","total_count":1,"children":[]},{"name":"fetchCurrentUser()","total_count":1,"children":[]},{"name":"forgotPassword()","total_count":1,"children":[]},{"name":"ForgotPasswordPayload","total_count":1,"children":[]},{"name":"login()","total_count":1,"children":[]},{"name":"LoginPayload","total_count":1,"children":[]},{"name":"register()","total_count":1,"children":[]},{"name":"RegisterPayload","total_count":1,"children":[]},{"name":"resetPassword()","total_count":1,"children":[]},{"name":"ResetPasswordPayload","total_count":1,"children":[]},{"name":"verifyResetOTP()","total_count":1,"children":[]},{"name":"VerifyResetOTPPayload","total_count":1,"children":[]},{"name":"VerifyResetOTPResponse","total_count":1,"children":[]}]},{"name":"auth-store.ts","total_count":4,"children":[{"name":"AuthState","total_count":1,"children":[]},{"name":"AuthUser","total_count":1,"children":[]},{"name":"useAuthStore","total_count":1,"children":[]},{"name":"UserRole","total_count":1,"children":[]}]},{"name":"auth.py","total_count":14,"children":[{"name":"ApiResponse","total_count":1,"children":[]},{"name":"forgot_password()","total_count":1,"children":[]},{"name":"ForgotPasswordRequest","total_count":1,"children":[]},{"name":"login()","total_count":1,"children":[]},{"name":"LoginRequest","total_count":1,"children":[]},{"name":"me()","total_count":1,"children":[]},{"name":"register()","total_count":1,"children":[]},{"name":"RegisterRequest","total_count":1,"children":[]},{"name":"reset_password()","total_count":1,"children":[]},{"name":"ResetPasswordRequest","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"verify_reset_otp()","total_count":1,"children":[]},{"name":"VerifyResetOTPRequest","total_count":1,"children":[]}]},{"name":"auth.py","total_count":10,"children":[{"name":"AuthResponse","total_count":1,"children":[]},{"name":"AuthUser","total_count":1,"children":[]},{"name":"ForgotPasswordRequest","total_count":1,"children":[]},{"name":"LoginRequest","total_count":1,"children":[]},{"name":"PasswordResetMessage","total_count":1,"children":[]},{"name":"RegisterRequest","total_count":1,"children":[]},{"name":"ResetPasswordRequest","total_count":1,"children":[]},{"name":"TokenResponse","total_count":1,"children":[]},{"name":"VerifyResetOTPRequest","total_count":1,"children":[]},{"name":"VerifyResetOTPResponse","total_count":1,"children":[]}]},{"name":"auth_service.py","total_count":8,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".login()","total_count":1,"children":[]},{"name":".register()","total_count":1,"children":[]},{"name":"AuthResponse","total_count":1,"children":[]},{"name":"AuthService","total_count":1,"children":[]},{"name":"LoginRequest","total_count":1,"children":[]},{"name":"RegisterRequest","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]}]},{"name":"AuthField.tsx","total_count":2,"children":[{"name":"AuthField","total_count":1,"children":[]},{"name":"AuthFieldProps","total_count":1,"children":[]}]},{"name":"AuthShell.tsx","total_count":4,"children":[{"name":"AuthShell()","total_count":1,"children":[]},{"name":"AuthShellProps","total_count":1,"children":[]},{"name":"operationCards","total_count":1,"children":[]},{"name":"progressRows","total_count":1,"children":[]}]},{"name":"Badge.tsx","total_count":3,"children":[{"name":"Badge()","total_count":1,"children":[]},{"name":"BadgeTone","total_count":1,"children":[]},{"name":"toneClass","total_count":1,"children":[]}]},{"name":"base.py","total_count":1,"children":[{"name":"Base","total_count":1,"children":[]}]},{"name":"BenefitsSection.tsx","total_count":2,"children":[{"name":"benefits","total_count":1,"children":[]},{"name":"BenefitsSection()","total_count":1,"children":[]}]},{"name":"Breadcrumbs.tsx","total_count":2,"children":[{"name":"BreadcrumbItem","total_count":1,"children":[]},{"name":"Breadcrumbs()","total_count":1,"children":[]}]},{"name":"Button.tsx","total_count":1,"children":[{"name":"Button()","total_count":1,"children":[]}]},{"name":"capabilities.ts","total_count":10,"children":[{"name":"canAccessRoute()","total_count":1,"children":[]},{"name":"canManageInventory()","total_count":1,"children":[]},{"name":"canManageProcurement()","total_count":1,"children":[]},{"name":"canManageProducts()","total_count":1,"children":[]},{"name":"canManageTenants()","total_count":1,"children":[]},{"name":"canManageUsers()","total_count":1,"children":[]},{"name":"canViewInventoryDashboard()","total_count":1,"children":[]},{"name":"canViewPlatformAnalytics()","total_count":1,"children":[]},{"name":"canViewProducts()","total_count":1,"children":[]},{"name":"ROLE_LABELS","total_count":1,"children":[]}]},{"name":"Card.tsx","total_count":3,"children":[{"name":"Card()","total_count":1,"children":[]},{"name":"CardContent()","total_count":1,"children":[]},{"name":"CardHeader()","total_count":1,"children":[]}]},{"name":"cn.ts","total_count":1,"children":[{"name":"cn()","total_count":1,"children":[]}]},{"name":"common.py","total_count":1,"children":[{"name":"ApiResponse","total_count":1,"children":[]}]},{"name":"config.py","total_count":6,"children":[{"name":"backend_cors_origins()","total_count":1,"children":[]},{"name":"bool","total_count":1,"children":[]},{"name":"get_settings()","total_count":1,"children":[]},{"name":"Settings","total_count":1,"children":[]},{"name":"smtp_configured()","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]}]},{"name":"ConfirmDialog.tsx","total_count":1,"children":[{"name":"ConfirmDialog()","total_count":1,"children":[]}]},{"name":"ContentLayout.tsx","total_count":2,"children":[{"name":"ContentLayout()","total_count":1,"children":[]},{"name":"ScrollableContent()","total_count":1,"children":[]}]},{"name":"CtaSection.tsx","total_count":1,"children":[{"name":"CtaSection()","total_count":1,"children":[]}]},{"name":"dashboard-api.ts","total_count":14,"children":[{"name":"ActivityTrend","total_count":1,"children":[]},{"name":"AdminDashboard","total_count":1,"children":[]},{"name":"AdminTenantDrilldown","total_count":1,"children":[]},{"name":"CategoryStat","total_count":1,"children":[]},{"name":"getAdminDashboard()","total_count":1,"children":[]},{"name":"getAdminTenantDrilldown()","total_count":1,"children":[]},{"name":"getRetailerDashboard()","total_count":1,"children":[]},{"name":"MovementSummary","total_count":1,"children":[]},{"name":"PlatformUsage","total_count":1,"children":[]},{"name":"RecentTransaction","total_count":1,"children":[]},{"name":"RetailerDashboard","total_count":1,"children":[]},{"name":"SupplierActivity","total_count":1,"children":[]},{"name":"TenantActivitySummary","total_count":1,"children":[]},{"name":"TenantSummary","total_count":1,"children":[]}]},{"name":"dashboard.py","total_count":11,"children":[{"name":"admin_dashboard()","total_count":1,"children":[]},{"name":"admin_tenant_drilldown()","total_count":1,"children":[]},{"name":"ApiResponse","total_count":1,"children":[]},{"name":"DbSession","total_count":1,"children":[]},{"name":"Depends","total_count":1,"children":[]},{"name":"get_current_user","total_count":1,"children":[]},{"name":"require_roles","total_count":1,"children":[]},{"name":"retailer_dashboard()","total_count":1,"children":[]},{"name":"SUPER_ADMIN","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"dashboard.py","total_count":11,"children":[{"name":"AdminDashboard","total_count":1,"children":[]},{"name":"AdminTenantDrilldown","total_count":1,"children":[]},{"name":"DashboardActivityTrend","total_count":1,"children":[]},{"name":"DashboardCategoryStat","total_count":1,"children":[]},{"name":"DashboardMovementSummary","total_count":1,"children":[]},{"name":"DashboardPlatformUsage","total_count":1,"children":[]},{"name":"DashboardRecentTransaction","total_count":1,"children":[]},{"name":"DashboardSupplierActivity","total_count":1,"children":[]},{"name":"DashboardTenantActivitySummary","total_count":1,"children":[]},{"name":"DashboardTenantSummary","total_count":1,"children":[]},{"name":"RetailerDashboard","total_count":1,"children":[]}]},{"name":"dashboard_repository.py","total_count":27,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".active_tenants()","total_count":1,"children":[]},{"name":".activity_trends()","total_count":1,"children":[]},{"name":".category_stats()","total_count":1,"children":[]},{"name":".low_stock_products()","total_count":1,"children":[]},{"name":".low_stock_tenant_count()","total_count":1,"children":[]},{"name":".movement_summary()","total_count":1,"children":[]},{"name":".platform_usage()","total_count":1,"children":[]},{"name":".purchase_order_status_count()","total_count":1,"children":[]},{"name":".recent_tenant_activity()","total_count":1,"children":[]},{"name":".recent_transactions()","total_count":1,"children":[]},{"name":".supplier_activity()","total_count":1,"children":[]},{"name":".tenant_summaries()","total_count":1,"children":[]},{"name":".tenant_summary()","total_count":1,"children":[]},{"name":".tenants_with_products()","total_count":1,"children":[]},{"name":".tenants_with_recent_activity()","total_count":1,"children":[]},{"name":".total_inventory_quantity()","total_count":1,"children":[]},{"name":".total_products()","total_count":1,"children":[]},{"name":".total_purchase_orders()","total_count":1,"children":[]},{"name":".total_suppliers()","total_count":1,"children":[]},{"name":".total_tenants()","total_count":1,"children":[]},{"name":".total_users()","total_count":1,"children":[]},{"name":"DashboardRepository","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"dashboard_service.py","total_count":10,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".admin_dashboard()","total_count":1,"children":[]},{"name":".admin_tenant_drilldown()","total_count":1,"children":[]},{"name":".retailer_dashboard()","total_count":1,"children":[]},{"name":"AdminDashboard","total_count":1,"children":[]},{"name":"AdminTenantDrilldown","total_count":1,"children":[]},{"name":"DashboardService","total_count":1,"children":[]},{"name":"RetailerDashboard","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"DashboardCharts.tsx","total_count":9,"children":[{"name":"CHART_COLORS","total_count":1,"children":[]},{"name":"ChartDatum","total_count":1,"children":[]},{"name":"ChartShell()","total_count":1,"children":[]},{"name":"ChartTooltip()","total_count":1,"children":[]},{"name":"DonutChartCard()","total_count":1,"children":[]},{"name":"HorizontalBarChartCard()","total_count":1,"children":[]},{"name":"LineChartCard()","total_count":1,"children":[]},{"name":"MovementTrendChart()","total_count":1,"children":[]},{"name":"VerticalBarChartCard()","total_count":1,"children":[]}]},{"name":"DashboardMockup.tsx","total_count":2,"children":[{"name":"DashboardMockup()","total_count":1,"children":[]},{"name":"rows","total_count":1,"children":[]}]},{"name":"DashboardPage.tsx","total_count":14,"children":[{"name":"AdminDashboardView()","total_count":1,"children":[]},{"name":"buildInventoryValueData()","total_count":1,"children":[]},{"name":"buildLowStockData()","total_count":1,"children":[]},{"name":"buildMovementTrend()","total_count":1,"children":[]},{"name":"DashboardPage()","total_count":1,"children":[]},{"name":"formatNullableDate()","total_count":1,"children":[]},{"name":"formatPeriod()","total_count":1,"children":[]},{"name":"InventoryOperationsDashboardView()","total_count":1,"children":[]},{"name":"MovementWidget()","total_count":1,"children":[]},{"name":"PlatformActivityWidget()","total_count":1,"children":[]},{"name":"RecentActivity()","total_count":1,"children":[]},{"name":"RecentTenantActivity()","total_count":1,"children":[]},{"name":"StatCard()","total_count":1,"children":[]},{"name":"SupplierActivityWidget()","total_count":1,"children":[]}]},{"name":"DashboardPreviewSection.tsx","total_count":2,"children":[{"name":"DashboardPreviewSection()","total_count":1,"children":[]},{"name":"highlights","total_count":1,"children":[]}]},{"name":"DataTable.tsx","total_count":6,"children":[{"name":"DataTable()","total_count":1,"children":[]},{"name":"DataTableBody()","total_count":1,"children":[]},{"name":"DataTableCell()","total_count":1,"children":[]},{"name":"DataTableHead()","total_count":1,"children":[]},{"name":"DataTableHeader()","total_count":1,"children":[]},{"name":"DataTableRow()","total_count":1,"children":[]}]},{"name":"deps.py","total_count":11,"children":[{"name":"Depends","total_count":1,"children":[]},{"name":"ensure_tenant_access()","total_count":1,"children":[]},{"name":"get_current_user()","total_count":1,"children":[]},{"name":"HTTPAuthorizationCredentials","total_count":1,"children":[]},{"name":"require_operational_user()","total_count":1,"children":[]},{"name":"require_roles()","total_count":1,"children":[]},{"name":"require_tenant_roles()","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UserRole","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"email_service.py","total_count":7,"children":[{"name":".send_password_reset_otp()","total_count":1,"children":[]},{"name":"_html_body()","total_count":1,"children":[]},{"name":"_text_body()","total_count":1,"children":[]},{"name":"EmailConfigurationError","total_count":1,"children":[]},{"name":"EmailDeliveryError","total_count":1,"children":[]},{"name":"EmailService","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]}]},{"name":"EmptyState.tsx","total_count":1,"children":[{"name":"EmptyState()","total_count":1,"children":[]}]},{"name":"enums.py","total_count":5,"children":[{"name":"PurchaseOrderAuditAction","total_count":1,"children":[]},{"name":"PurchaseOrderStatus","total_count":1,"children":[]},{"name":"SupplierStatus","total_count":1,"children":[]},{"name":"TenantStatus","total_count":1,"children":[]},{"name":"UserRole","total_count":1,"children":[]}]},{"name":"env.py","total_count":2,"children":[{"name":"run_migrations_offline()","total_count":1,"children":[]},{"name":"run_migrations_online()","total_count":1,"children":[]}]},{"name":"FeatureCard.tsx","total_count":1,"children":[{"name":"FeatureCard()","total_count":1,"children":[]}]},{"name":"FeaturesSection.tsx","total_count":2,"children":[{"name":"features","total_count":1,"children":[]},{"name":"FeaturesSection()","total_count":1,"children":[]}]},{"name":"ForgotPasswordPage.tsx","total_count":3,"children":[{"name":"ForgotPasswordPage()","total_count":1,"children":[]},{"name":"isEmail()","total_count":1,"children":[]},{"name":"Step","total_count":1,"children":[]}]},{"name":"health.py","total_count":4,"children":[{"name":"database_health_check()","total_count":1,"children":[]},{"name":"health_check()","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]}]},{"name":"HeroSection.tsx","total_count":1,"children":[{"name":"HeroSection()","total_count":1,"children":[]}]},{"name":"Input.tsx","total_count":1,"children":[{"name":"Input","total_count":1,"children":[]}]},{"name":"inventory-api.ts","total_count":8,"children":[{"name":"adjustInventory()","total_count":1,"children":[]},{"name":"InventoryHistoryQuery","total_count":1,"children":[]},{"name":"InventoryMovementPayload","total_count":1,"children":[]},{"name":"InventoryTransaction","total_count":1,"children":[]},{"name":"InventoryTransactionType","total_count":1,"children":[]},{"name":"listInventoryHistory()","total_count":1,"children":[]},{"name":"stockIn()","total_count":1,"children":[]},{"name":"stockOut()","total_count":1,"children":[]}]},{"name":"inventory.py","total_count":13,"children":[{"name":"_tenant_id_or_forbid()","total_count":1,"children":[]},{"name":"_transaction_data()","total_count":1,"children":[]},{"name":"adjustment()","total_count":1,"children":[]},{"name":"ApiResponse","total_count":1,"children":[]},{"name":"history()","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"InventoryAdjustmentCreate","total_count":1,"children":[]},{"name":"InventoryTransactionCreate","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"stock_in()","total_count":1,"children":[]},{"name":"stock_out()","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"inventory.py","total_count":3,"children":[{"name":"InventoryAdjustmentCreate","total_count":1,"children":[]},{"name":"InventoryTransactionCreate","total_count":1,"children":[]},{"name":"InventoryTransactionOut","total_count":1,"children":[]}]},{"name":"inventory_repository.py","total_count":10,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".create()","total_count":1,"children":[]},{"name":".get_by_id()","total_count":1,"children":[]},{"name":".list_by_tenant()","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"InventoryRepository","total_count":1,"children":[]},{"name":"InventoryTransaction","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"inventory_service.py","total_count":13,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._get_product()","total_count":1,"children":[]},{"name":".adjustment()","total_count":1,"children":[]},{"name":".history()","total_count":1,"children":[]},{"name":".stock_in()","total_count":1,"children":[]},{"name":".stock_out()","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"InventoryAdjustmentCreate","total_count":1,"children":[]},{"name":"InventoryService","total_count":1,"children":[]},{"name":"InventoryTransactionCreate","total_count":1,"children":[]},{"name":"Product","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"inventory_transaction.py","total_count":1,"children":[{"name":"InventoryTransaction","total_count":1,"children":[]}]},{"name":"InventoryPage.tsx","total_count":7,"children":[{"name":"formatDate()","total_count":1,"children":[]},{"name":"initialForm","total_count":1,"children":[]},{"name":"InventoryPage()","total_count":1,"children":[]},{"name":"MovementFormState","total_count":1,"children":[]},{"name":"productLabel()","total_count":1,"children":[]},{"name":"transactionLabels","total_count":1,"children":[]},{"name":"transactionTone","total_count":1,"children":[]}]},{"name":"InventoryTransactionsPage.tsx","total_count":6,"children":[{"name":"csvEscape()","total_count":1,"children":[]},{"name":"formatDate()","total_count":1,"children":[]},{"name":"InventoryTransactionsPage()","total_count":1,"children":[]},{"name":"productLabel()","total_count":1,"children":[]},{"name":"transactionLabels","total_count":1,"children":[]},{"name":"transactionTone","total_count":1,"children":[]}]},{"name":"LandingButton.tsx","total_count":2,"children":[{"name":"LandingButton()","total_count":1,"children":[]},{"name":"LandingButtonProps","total_count":1,"children":[]}]},{"name":"LandingContainer.tsx","total_count":1,"children":[{"name":"LandingContainer()","total_count":1,"children":[]}]},{"name":"LandingFooter.tsx","total_count":2,"children":[{"name":"columns","total_count":1,"children":[]},{"name":"LandingFooter()","total_count":1,"children":[]}]},{"name":"LandingNavbar.tsx","total_count":2,"children":[{"name":"LandingNavbar()","total_count":1,"children":[]},{"name":"navLinks","total_count":1,"children":[]}]},{"name":"LandingPage.tsx","total_count":1,"children":[{"name":"LandingPage()","total_count":1,"children":[]}]},{"name":"LoadingState.tsx","total_count":2,"children":[{"name":"LoadingState()","total_count":1,"children":[]},{"name":"SkeletonRows()","total_count":1,"children":[]}]},{"name":"LoginPage.tsx","total_count":3,"children":[{"name":"LoginForm","total_count":1,"children":[]},{"name":"LoginPage()","total_count":1,"children":[]},{"name":"schema","total_count":1,"children":[]}]},{"name":"main.py","total_count":2,"children":[{"name":"create_app()","total_count":1,"children":[]},{"name":"FastAPI","total_count":1,"children":[]}]},{"name":"MetricCard.tsx","total_count":1,"children":[{"name":"MetricCard()","total_count":1,"children":[]}]},{"name":"mixins.py","total_count":2,"children":[{"name":"TimestampMixin","total_count":1,"children":[]},{"name":"UUIDPrimaryKeyMixin","total_count":1,"children":[]}]},{"name":"Modal.tsx","total_count":1,"children":[{"name":"Modal()","total_count":1,"children":[]}]},{"name":"NotificationCenter.tsx","total_count":4,"children":[{"name":"formatDate()","total_count":1,"children":[]},{"name":"NotificationCenter()","total_count":1,"children":[]},{"name":"NotificationItem","total_count":1,"children":[]},{"name":"toneClass","total_count":1,"children":[]}]},{"name":"otp.py","total_count":6,"children":[{"name":"bool","total_count":1,"children":[]},{"name":"generate_otp()","total_count":1,"children":[]},{"name":"generate_reset_token()","total_count":1,"children":[]},{"name":"hash_reset_secret()","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"verify_reset_secret()","total_count":1,"children":[]}]},{"name":"package.json","total_count":42,"children":[{"name":"@eslint/js","total_count":1,"children":[]},{"name":"@hookform/resolvers","total_count":1,"children":[]},{"name":"@tanstack/react-query","total_count":1,"children":[]},{"name":"@testing-library/jest-dom","total_count":1,"children":[]},{"name":"@testing-library/react","total_count":1,"children":[]},{"name":"@types/node","total_count":1,"children":[]},{"name":"@types/react","total_count":1,"children":[]},{"name":"@types/react-dom","total_count":1,"children":[]},{"name":"@vitejs/plugin-react","total_count":1,"children":[]},{"name":"autoprefixer","total_count":1,"children":[]},{"name":"axios","total_count":1,"children":[]},{"name":"build","total_count":1,"children":[]},{"name":"clsx","total_count":1,"children":[]},{"name":"dependencies","total_count":1,"children":[]},{"name":"dev","total_count":1,"children":[]},{"name":"devDependencies","total_count":1,"children":[]},{"name":"eslint","total_count":1,"children":[]},{"name":"eslint-plugin-react-hooks","total_count":1,"children":[]},{"name":"eslint-plugin-react-refresh","total_count":1,"children":[]},{"name":"framer-motion","total_count":1,"children":[]},{"name":"jsdom","total_count":1,"children":[]},{"name":"lint","total_count":1,"children":[]},{"name":"lucide-react","total_count":1,"children":[]},{"name":"name","total_count":1,"children":[]},{"name":"postcss","total_count":1,"children":[]},{"name":"preview","total_count":1,"children":[]},{"name":"private","total_count":1,"children":[]},{"name":"react","total_count":1,"children":[]},{"name":"react-dom","total_count":1,"children":[]},{"name":"react-hook-form","total_count":1,"children":[]},{"name":"react-router-dom","total_count":1,"children":[]},{"name":"recharts","total_count":1,"children":[]},{"name":"scripts","total_count":1,"children":[]},{"name":"tailwind-merge","total_count":1,"children":[]},{"name":"tailwindcss","total_count":1,"children":[]},{"name":"type","total_count":1,"children":[]},{"name":"typescript","total_count":1,"children":[]},{"name":"version","total_count":1,"children":[]},{"name":"vite","total_count":1,"children":[]},{"name":"vitest","total_count":1,"children":[]},{"name":"zod","total_count":1,"children":[]},{"name":"zustand","total_count":1,"children":[]}]},{"name":"Page.tsx","total_count":9,"children":[{"name":"DashboardGrid()","total_count":1,"children":[]},{"name":"FilterBar()","total_count":1,"children":[]},{"name":"Page()","total_count":1,"children":[]},{"name":"PageContainer()","total_count":1,"children":[]},{"name":"PageHeader()","total_count":1,"children":[]},{"name":"SectionCard()","total_count":1,"children":[]},{"name":"SectionHeader()","total_count":1,"children":[]},{"name":"TableContainer()","total_count":1,"children":[]},{"name":"Toolbar()","total_count":1,"children":[]}]},{"name":"PasswordField.tsx","total_count":2,"children":[{"name":"PasswordField","total_count":1,"children":[]},{"name":"PasswordFieldProps","total_count":1,"children":[]}]},{"name":"PlaceholderPage.tsx","total_count":2,"children":[{"name":"PlaceholderPage()","total_count":1,"children":[]},{"name":"PlaceholderPageProps","total_count":1,"children":[]}]},{"name":"procurement-api.ts","total_count":26,"children":[{"name":"approvePurchaseOrder()","total_count":1,"children":[]},{"name":"cancelPurchaseOrder()","total_count":1,"children":[]},{"name":"createPurchaseOrder()","total_count":1,"children":[]},{"name":"createSupplier()","total_count":1,"children":[]},{"name":"deleteSupplier()","total_count":1,"children":[]},{"name":"getPurchaseOrder()","total_count":1,"children":[]},{"name":"getPurchaseOrderAnalytics()","total_count":1,"children":[]},{"name":"listPurchaseOrders()","total_count":1,"children":[]},{"name":"listSuppliers()","total_count":1,"children":[]},{"name":"PageParams","total_count":1,"children":[]},{"name":"PurchaseOrder","total_count":1,"children":[]},{"name":"PurchaseOrderAnalytics","total_count":1,"children":[]},{"name":"PurchaseOrderAuditLog","total_count":1,"children":[]},{"name":"PurchaseOrderItem","total_count":1,"children":[]},{"name":"PurchaseOrderItemPayload","total_count":1,"children":[]},{"name":"PurchaseOrderListItem","total_count":1,"children":[]},{"name":"PurchaseOrderPayload","total_count":1,"children":[]},{"name":"PurchaseOrderQuery","total_count":1,"children":[]},{"name":"PurchaseOrderStatus","total_count":1,"children":[]},{"name":"receivePurchaseOrder()","total_count":1,"children":[]},{"name":"submitPurchaseOrder()","total_count":1,"children":[]},{"name":"Supplier","total_count":1,"children":[]},{"name":"SupplierPayload","total_count":1,"children":[]},{"name":"SupplierQuery","total_count":1,"children":[]},{"name":"SupplierStatus","total_count":1,"children":[]},{"name":"updateSupplier()","total_count":1,"children":[]}]},{"name":"procurement.py","total_count":38,"children":[{"name":"_po_detail_data()","total_count":1,"children":[]},{"name":"_po_item_data()","total_count":1,"children":[]},{"name":"_po_list_data()","total_count":1,"children":[]},{"name":"_supplier_data()","total_count":1,"children":[]},{"name":"_tenant_id()","total_count":1,"children":[]},{"name":"ApiResponse","total_count":1,"children":[]},{"name":"approve_purchase_order()","total_count":1,"children":[]},{"name":"cancel_purchase_order()","total_count":1,"children":[]},{"name":"create_purchase_order()","total_count":1,"children":[]},{"name":"create_supplier()","total_count":1,"children":[]},{"name":"DbSession","total_count":1,"children":[]},{"name":"delete_purchase_order()","total_count":1,"children":[]},{"name":"delete_supplier()","total_count":1,"children":[]},{"name":"get_purchase_order()","total_count":1,"children":[]},{"name":"get_supplier()","total_count":1,"children":[]},{"name":"LimitQuery","total_count":1,"children":[]},{"name":"list_purchase_orders()","total_count":1,"children":[]},{"name":"list_suppliers()","total_count":1,"children":[]},{"name":"PageQuery","total_count":1,"children":[]},{"name":"ProcurementManager","total_count":1,"children":[]},{"name":"purchase_order_analytics()","total_count":1,"children":[]},{"name":"PurchaseOrder","total_count":1,"children":[]},{"name":"PurchaseOrderCreate","total_count":1,"children":[]},{"name":"PurchaseOrderReceive","total_count":1,"children":[]},{"name":"PurchaseOrderStatusQuery","total_count":1,"children":[]},{"name":"PurchaseOrderUpdate","total_count":1,"children":[]},{"name":"receive_purchase_order()","total_count":1,"children":[]},{"name":"SearchQuery","total_count":1,"children":[]},{"name":"submit_purchase_order()","total_count":1,"children":[]},{"name":"Supplier","total_count":1,"children":[]},{"name":"SupplierCreate","total_count":1,"children":[]},{"name":"SupplierIdQuery","total_count":1,"children":[]},{"name":"SupplierStatusQuery","total_count":1,"children":[]},{"name":"SupplierUpdate","total_count":1,"children":[]},{"name":"update_purchase_order()","total_count":1,"children":[]},{"name":"update_supplier()","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"procurement.py","total_count":13,"children":[{"name":"PurchaseOrderAnalytics","total_count":1,"children":[]},{"name":"PurchaseOrderAuditLogOut","total_count":1,"children":[]},{"name":"PurchaseOrderCreate","total_count":1,"children":[]},{"name":"PurchaseOrderItemCreate","total_count":1,"children":[]},{"name":"PurchaseOrderItemOut","total_count":1,"children":[]},{"name":"PurchaseOrderListItem","total_count":1,"children":[]},{"name":"PurchaseOrderOut","total_count":1,"children":[]},{"name":"PurchaseOrderReceive","total_count":1,"children":[]},{"name":"PurchaseOrderReceiveItem","total_count":1,"children":[]},{"name":"PurchaseOrderUpdate","total_count":1,"children":[]},{"name":"SupplierCreate","total_count":1,"children":[]},{"name":"SupplierOut","total_count":1,"children":[]},{"name":"SupplierUpdate","total_count":1,"children":[]}]},{"name":"procurement_service.py","total_count":37,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._audit()","total_count":1,"children":[]},{"name":"._ensure_retailer_admin()","total_count":1,"children":[]},{"name":"._next_po_number()","total_count":1,"children":[]},{"name":"._po_query()","total_count":1,"children":[]},{"name":"._validate_products()","total_count":1,"children":[]},{"name":".analytics()","total_count":1,"children":[]},{"name":".approve_purchase_order()","total_count":1,"children":[]},{"name":".cancel_purchase_order()","total_count":1,"children":[]},{"name":".create_purchase_order()","total_count":1,"children":[]},{"name":".create_supplier()","total_count":1,"children":[]},{"name":".delete_purchase_order()","total_count":1,"children":[]},{"name":".delete_supplier()","total_count":1,"children":[]},{"name":".get_purchase_order()","total_count":1,"children":[]},{"name":".get_supplier()","total_count":1,"children":[]},{"name":".list_purchase_orders()","total_count":1,"children":[]},{"name":".list_suppliers()","total_count":1,"children":[]},{"name":".receive_purchase_order()","total_count":1,"children":[]},{"name":".submit_purchase_order()","total_count":1,"children":[]},{"name":".update_purchase_order()","total_count":1,"children":[]},{"name":".update_supplier()","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"ProcurementService","total_count":1,"children":[]},{"name":"PurchaseOrder","total_count":1,"children":[]},{"name":"PurchaseOrderAuditAction","total_count":1,"children":[]},{"name":"PurchaseOrderCreate","total_count":1,"children":[]},{"name":"PurchaseOrderReceive","total_count":1,"children":[]},{"name":"PurchaseOrderStatus","total_count":1,"children":[]},{"name":"PurchaseOrderUpdate","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"Supplier","total_count":1,"children":[]},{"name":"SupplierCreate","total_count":1,"children":[]},{"name":"SupplierStatus","total_count":1,"children":[]},{"name":"SupplierUpdate","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"product-api.ts","total_count":10,"children":[{"name":"createProduct()","total_count":1,"children":[]},{"name":"deleteProduct()","total_count":1,"children":[]},{"name":"getProduct()","total_count":1,"children":[]},{"name":"listProducts()","total_count":1,"children":[]},{"name":"listProductsPage()","total_count":1,"children":[]},{"name":"Product","total_count":1,"children":[]},{"name":"ProductCreate","total_count":1,"children":[]},{"name":"ProductQuery","total_count":1,"children":[]},{"name":"ProductUpdate","total_count":1,"children":[]},{"name":"updateProduct()","total_count":1,"children":[]}]},{"name":"product.py","total_count":1,"children":[{"name":"Product","total_count":1,"children":[]}]},{"name":"product.py","total_count":3,"children":[{"name":"ProductCreate","total_count":1,"children":[]},{"name":"ProductOut","total_count":1,"children":[]},{"name":"ProductUpdate","total_count":1,"children":[]}]},{"name":"product_repository.py","total_count":16,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._filtered_query()","total_count":1,"children":[]},{"name":".count_by_tenant()","total_count":1,"children":[]},{"name":".create()","total_count":1,"children":[]},{"name":".get_by_id()","total_count":1,"children":[]},{"name":".get_by_sku()","total_count":1,"children":[]},{"name":".get_by_sku_for_update()","total_count":1,"children":[]},{"name":".list_by_tenant()","total_count":1,"children":[]},{"name":"bool","total_count":1,"children":[]},{"name":"float","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"Product","total_count":1,"children":[]},{"name":"ProductRepository","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"product_service.py","total_count":17,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".count()","total_count":1,"children":[]},{"name":".create()","total_count":1,"children":[]},{"name":".delete()","total_count":1,"children":[]},{"name":".get()","total_count":1,"children":[]},{"name":".list()","total_count":1,"children":[]},{"name":".update()","total_count":1,"children":[]},{"name":"bool","total_count":1,"children":[]},{"name":"float","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"Product","total_count":1,"children":[]},{"name":"ProductCreate","total_count":1,"children":[]},{"name":"ProductService","total_count":1,"children":[]},{"name":"ProductUpdate","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"ProductFormPage.tsx","total_count":3,"children":[{"name":"ProductFormData","total_count":1,"children":[]},{"name":"ProductFormPage()","total_count":1,"children":[]},{"name":"schema","total_count":1,"children":[]}]},{"name":"products.py","total_count":15,"children":[{"name":"bool","total_count":1,"children":[]},{"name":"create_product()","total_count":1,"children":[]},{"name":"DbSession","total_count":1,"children":[]},{"name":"delete_product()","total_count":1,"children":[]},{"name":"float","total_count":1,"children":[]},{"name":"get_product()","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"list_products()","total_count":1,"children":[]},{"name":"ProductCreate","total_count":1,"children":[]},{"name":"ProductManager","total_count":1,"children":[]},{"name":"ProductReader","total_count":1,"children":[]},{"name":"ProductUpdate","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"update_product()","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"ProductsPage.tsx","total_count":5,"children":[{"name":"formatCurrency()","total_count":1,"children":[]},{"name":"generateCsv()","total_count":1,"children":[]},{"name":"ProductsPage()","total_count":1,"children":[]},{"name":"stockLabel()","total_count":1,"children":[]},{"name":"stockTone()","total_count":1,"children":[]}]},{"name":"ProtectedRoute.tsx","total_count":6,"children":[{"name":"GuestRoute()","total_count":1,"children":[]},{"name":"ProtectedLoadingState()","total_count":1,"children":[]},{"name":"ProtectedRoute()","total_count":1,"children":[]},{"name":"ProtectedRouteProps","total_count":1,"children":[]},{"name":"RoleProtectedRoute()","total_count":1,"children":[]},{"name":"RoleProtectedRouteProps","total_count":1,"children":[]}]},{"name":"purchase_order.py","total_count":3,"children":[{"name":"PurchaseOrder","total_count":1,"children":[]},{"name":"PurchaseOrderAuditLog","total_count":1,"children":[]},{"name":"PurchaseOrderItem","total_count":1,"children":[]}]},{"name":"PurchaseOrderDetailPage.tsx","total_count":5,"children":[{"name":"formatCurrency()","total_count":1,"children":[]},{"name":"getErrorMessage()","total_count":1,"children":[]},{"name":"PurchaseOrderDetailPage()","total_count":1,"children":[]},{"name":"ReceiveModal()","total_count":1,"children":[]},{"name":"statusLabels","total_count":1,"children":[]}]},{"name":"PurchaseOrdersPage.tsx","total_count":6,"children":[{"name":"CreatePurchaseOrderModal()","total_count":1,"children":[]},{"name":"formatCurrency()","total_count":1,"children":[]},{"name":"getErrorMessage()","total_count":1,"children":[]},{"name":"PurchaseOrdersPage()","total_count":1,"children":[]},{"name":"statusLabels","total_count":1,"children":[]},{"name":"statusTone","total_count":1,"children":[]}]},{"name":"README.md","total_count":16,"children":[{"name":"code:bash (cd backend)","total_count":1,"children":[]},{"name":"code:bash (cd backend)","total_count":1,"children":[]},{"name":"code:bash (cd frontend)","total_count":1,"children":[]},{"name":"code:bash (cd frontend)","total_count":1,"children":[]},{"name":"code:bash (cp .env.example .env)","total_count":1,"children":[]},{"name":"code:bash (cp backend/.env.example backend/.env)","total_count":1,"children":[]},{"name":"code:bash (cp frontend/.env.example frontend/.env)","total_count":1,"children":[]},{"name":"code:bash (createdb ims)","total_count":1,"children":[]},{"name":"code:bash (docker compose up --build)","total_count":1,"children":[]},{"name":"code:text (inventory-management-system/)","total_count":1,"children":[]},{"name":"Docker Setup","total_count":1,"children":[]},{"name":"Local Setup","total_count":1,"children":[]},{"name":"Manual Development Commands","total_count":1,"children":[]},{"name":"Multi-Tenant Inventory Management System","total_count":1,"children":[]},{"name":"Project Structure","total_count":1,"children":[]},{"name":"README.md","total_count":1,"children":[]}]},{"name":"RegisterPage.tsx","total_count":3,"children":[{"name":"RegisterForm","total_count":1,"children":[]},{"name":"RegisterPage()","total_count":1,"children":[]},{"name":"schema","total_count":1,"children":[]}]},{"name":"SectionHeading.tsx","total_count":1,"children":[{"name":"SectionHeading()","total_count":1,"children":[]}]},{"name":"security.py","total_count":6,"children":[{"name":"Any","total_count":1,"children":[]},{"name":"bool","total_count":1,"children":[]},{"name":"create_access_token()","total_count":1,"children":[]},{"name":"hash_password()","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"verify_password()","total_count":1,"children":[]}]},{"name":"seed_auth.py","total_count":7,"children":[{"name":"get_or_create_tenant()","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"object","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"Tenant","total_count":1,"children":[]},{"name":"upsert_user()","total_count":1,"children":[]}]},{"name":"seed_procurement.py","total_count":16,"children":[{"name":"add_audit()","total_count":1,"children":[]},{"name":"get_seed_actor()","total_count":1,"children":[]},{"name":"get_seed_tenant()","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"Product","total_count":1,"children":[]},{"name":"PurchaseOrder","total_count":1,"children":[]},{"name":"PurchaseOrderAuditAction","total_count":1,"children":[]},{"name":"reset_seed_purchase_orders()","total_count":1,"children":[]},{"name":"seed_purchase_orders()","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"Supplier","total_count":1,"children":[]},{"name":"Tenant","total_count":1,"children":[]},{"name":"upsert_products()","total_count":1,"children":[]},{"name":"upsert_suppliers()","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]}]},{"name":"seed_products.py","total_count":7,"children":[{"name":"Any","total_count":1,"children":[]},{"name":"get_or_create_tenant()","total_count":1,"children":[]},{"name":"main()","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"Tenant","total_count":1,"children":[]},{"name":"upsert_product()","total_count":1,"children":[]}]},{"name":"Select.tsx","total_count":1,"children":[{"name":"Select","total_count":1,"children":[]}]},{"name":"session.py","total_count":2,"children":[{"name":"get_db()","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]}]},{"name":"SettingsLayout.tsx","total_count":1,"children":[{"name":"SettingsLayout()","total_count":1,"children":[]}]},{"name":"SidebarLayout.tsx","total_count":2,"children":[{"name":"SidebarLayout()","total_count":1,"children":[]},{"name":"SidebarLayoutProps","total_count":1,"children":[]}]},{"name":"StatsSection.tsx","total_count":2,"children":[{"name":"metrics","total_count":1,"children":[]},{"name":"StatsSection()","total_count":1,"children":[]}]},{"name":"StatWidget.tsx","total_count":1,"children":[{"name":"StatWidget()","total_count":1,"children":[]}]},{"name":"supplier.py","total_count":1,"children":[{"name":"Supplier","total_count":1,"children":[]}]},{"name":"SuppliersPage.tsx","total_count":3,"children":[{"name":"emptySupplier","total_count":1,"children":[]},{"name":"getErrorMessage()","total_count":1,"children":[]},{"name":"SuppliersPage()","total_count":1,"children":[]}]},{"name":"tenant.py","total_count":1,"children":[{"name":"Tenant","total_count":1,"children":[]}]},{"name":"tenant_repository.py","total_count":9,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":".create()","total_count":1,"children":[]},{"name":".get_by_contact_email()","total_count":1,"children":[]},{"name":".get_by_id()","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"Tenant","total_count":1,"children":[]},{"name":"TenantRepository","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"TenantDrilldownPage.tsx","total_count":4,"children":[{"name":"ActivityTrendBars()","total_count":1,"children":[]},{"name":"formatDate()","total_count":1,"children":[]},{"name":"StatCard()","total_count":1,"children":[]},{"name":"TenantDrilldownPage()","total_count":1,"children":[]}]},{"name":"TestimonialsSection.tsx","total_count":1,"children":[{"name":"TestimonialsSection()","total_count":1,"children":[]}]},{"name":"TopbarLayout.tsx","total_count":2,"children":[{"name":"TopbarLayout()","total_count":1,"children":[]},{"name":"TopbarLayoutProps","total_count":1,"children":[]}]},{"name":"tsconfig.json","total_count":18,"children":[{"name":"allowJs","total_count":1,"children":[]},{"name":"allowSyntheticDefaultImports","total_count":1,"children":[]},{"name":"compilerOptions","total_count":1,"children":[]},{"name":"esModuleInterop","total_count":1,"children":[]},{"name":"forceConsistentCasingInFileNames","total_count":1,"children":[]},{"name":"include","total_count":1,"children":[]},{"name":"isolatedModules","total_count":1,"children":[]},{"name":"jsx","total_count":1,"children":[]},{"name":"lib","total_count":1,"children":[]},{"name":"module","total_count":1,"children":[]},{"name":"moduleResolution","total_count":1,"children":[]},{"name":"noEmit","total_count":1,"children":[]},{"name":"references","total_count":1,"children":[]},{"name":"resolveJsonModule","total_count":1,"children":[]},{"name":"skipLibCheck","total_count":1,"children":[]},{"name":"strict","total_count":1,"children":[]},{"name":"target","total_count":1,"children":[]},{"name":"useDefineForClassFields","total_count":1,"children":[]}]},{"name":"tsconfig.node.json","total_count":7,"children":[{"name":"allowSyntheticDefaultImports","total_count":1,"children":[]},{"name":"compilerOptions","total_count":1,"children":[]},{"name":"composite","total_count":1,"children":[]},{"name":"include","total_count":1,"children":[]},{"name":"module","total_count":1,"children":[]},{"name":"moduleResolution","total_count":1,"children":[]},{"name":"skipLibCheck","total_count":1,"children":[]}]},{"name":"UnauthorizedPage.tsx","total_count":1,"children":[{"name":"UnauthorizedPage()","total_count":1,"children":[]}]},{"name":"user-api.ts","total_count":8,"children":[{"name":"createUser()","total_count":1,"children":[]},{"name":"deleteUser()","total_count":1,"children":[]},{"name":"listUsersPage()","total_count":1,"children":[]},{"name":"ManagedUser","total_count":1,"children":[]},{"name":"updateUser()","total_count":1,"children":[]},{"name":"UserCreate","total_count":1,"children":[]},{"name":"UserQuery","total_count":1,"children":[]},{"name":"UserUpdate","total_count":1,"children":[]}]},{"name":"user.py","total_count":1,"children":[{"name":"User","total_count":1,"children":[]}]},{"name":"user.py","total_count":3,"children":[{"name":"UserCreate","total_count":1,"children":[]},{"name":"UserOut","total_count":1,"children":[]},{"name":"UserUpdate","total_count":1,"children":[]}]},{"name":"user_repository.py","total_count":17,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._filtered_query()","total_count":1,"children":[]},{"name":".count()","total_count":1,"children":[]},{"name":".create()","total_count":1,"children":[]},{"name":".delete()","total_count":1,"children":[]},{"name":".get_by_email()","total_count":1,"children":[]},{"name":".get_by_email_for_update()","total_count":1,"children":[]},{"name":".get_by_id()","total_count":1,"children":[]},{"name":".list()","total_count":1,"children":[]},{"name":"bool","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UserRepository","total_count":1,"children":[]},{"name":"UserRole","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"user_service.py","total_count":23,"children":[{"name":".__init__()","total_count":1,"children":[]},{"name":"._ensure_can_assign_role()","total_count":1,"children":[]},{"name":"._ensure_can_manage_users()","total_count":1,"children":[]},{"name":"._ensure_can_read()","total_count":1,"children":[]},{"name":"._ensure_email_available()","total_count":1,"children":[]},{"name":"._resolve_write_tenant()","total_count":1,"children":[]},{"name":"._tenant_scope()","total_count":1,"children":[]},{"name":".count()","total_count":1,"children":[]},{"name":".create()","total_count":1,"children":[]},{"name":".delete()","total_count":1,"children":[]},{"name":".get_visible()","total_count":1,"children":[]},{"name":".list()","total_count":1,"children":[]},{"name":".update()","total_count":1,"children":[]},{"name":"bool","total_count":1,"children":[]},{"name":"int","total_count":1,"children":[]},{"name":"Session","total_count":1,"children":[]},{"name":"str","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UserCreate","total_count":1,"children":[]},{"name":"UserRole","total_count":1,"children":[]},{"name":"UserService","total_count":1,"children":[]},{"name":"UserUpdate","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"users.py","total_count":18,"children":[{"name":"_user_data()","total_count":1,"children":[]},{"name":"ActiveQuery","total_count":1,"children":[]},{"name":"ApiResponse","total_count":1,"children":[]},{"name":"create_user()","total_count":1,"children":[]},{"name":"DbSession","total_count":1,"children":[]},{"name":"delete_user()","total_count":1,"children":[]},{"name":"get_user()","total_count":1,"children":[]},{"name":"LimitQuery","total_count":1,"children":[]},{"name":"list_users()","total_count":1,"children":[]},{"name":"PageQuery","total_count":1,"children":[]},{"name":"RoleQuery","total_count":1,"children":[]},{"name":"SearchQuery","total_count":1,"children":[]},{"name":"update_user()","total_count":1,"children":[]},{"name":"User","total_count":1,"children":[]},{"name":"UserCreate","total_count":1,"children":[]},{"name":"UserManager","total_count":1,"children":[]},{"name":"UserUpdate","total_count":1,"children":[]},{"name":"UUID","total_count":1,"children":[]}]},{"name":"UsersPage.tsx","total_count":9,"children":[{"name":"buildPayload()","total_count":1,"children":[]},{"name":"getErrorMessage()","total_count":1,"children":[]},{"name":"ROLE_LABELS","total_count":1,"children":[]},{"name":"roleBadgeClass()","total_count":1,"children":[]},{"name":"UserFormData","total_count":1,"children":[]},{"name":"UserFormModal()","total_count":1,"children":[]},{"name":"UserModalState","total_count":1,"children":[]},{"name":"userSchema","total_count":1,"children":[]},{"name":"UsersPage()","total_count":1,"children":[]}]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"__init__.py","total_count":1,"children":[]},{"name":"eslint.config.js","total_count":1,"children":[]},{"name":"index.ts","total_count":1,"children":[]},{"name":"main.tsx","total_count":1,"children":[]},{"name":"postcss.config.js","total_count":1,"children":[]},{"name":"router.py","total_count":1,"children":[]},{"name":"tailwind.config.ts","total_count":1,"children":[]},{"name":"vite-env.d.ts","total_count":1,"children":[]},{"name":"vite.config.ts","total_count":1,"children":[]}]};
+
+    function transformData(jsonData) {
+        // Helper function to recursively build the children structure
+        function processNode(node, parentL1StageName) {
+            let displayName = node.name;
+            // Append total_count if it exists and is not already in the name
+            if (node.total_count !== undefined) {
+                if (!/\(Total Count: \d+\)$/.test(displayName)) {
+                    displayName += ` (Total Count: ${node.total_count})`;
+                }
+            }
+
+            const newNode = { name: displayName };
+
+            if (parentL1StageName === "Root") {
+                 newNode.originalStageName = node.name;
+            } else {
+                newNode.originalStageName = parentL1StageName;
+            }
+
+            if (node.children && node.children.length > 0) {
+                const stageNameToPass = (parentL1StageName === "Root") ? node.name : parentL1StageName;
+                newNode.children = node.children.map(child => processNode(child, stageNameToPass));
+            }
+
+            return newNode;
+        }
+
+        let rootDisplayName = jsonData.name;
+        if (jsonData.total_count !== undefined && !/\(Total Count: \d+\)$/.test(rootDisplayName)) {
+            rootDisplayName += ` (Total Count: ${jsonData.total_count})`;
+        }
+
+        return {
+            name: rootDisplayName,
+            originalStageName: "Root",
+            children: (jsonData.children || []).map(child => processNode(child, "Root"))
+        };
+    }
+
+    const treeData = transformData(initialJsonData);
+
+    // Auto-populated phaseColors: every depth-1 child of the root gets
+    // a stable colour from a bigger palette so all top-level dirs are
+    // distinguishable.
+    const PALETTE = [
+      ["#3498DB","#2980B9","#AED6F1"], ["#2ECC71","#27AE60","#A9DFBF"],
+      ["#E74C3C","#C0392B","#F5B7B1"], ["#9B59B6","#8E44AD","#D7BDE2"],
+      ["#F39C12","#D68910","#FAD7A0"], ["#1ABC9C","#117864","#A2D9CE"],
+      ["#34495E","#1B2631","#ABB2B9"], ["#E67E22","#BA4A00","#F5CBA7"],
+      ["#16A085","#0E6655","#A2D9CE"], ["#D35400","#A04000","#EDBB99"],
+      ["#7F8C8D","#566573","#D5DBDB"], ["#C0392B","#7B241C","#F5B7B1"],
+      ["#2E86C1","#1B4F72","#A9CCE3"], ["#28B463","#196F3D","#A9DFBF"],
+      ["#AF7AC5","#6C3483","#D2B4DE"],
+    ];
+    const phaseColors = { "Root": { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+                          "Default": { fill: "#BDC3C7", stroke: "#95A5A6", collapsedFill: "#ECF0F1" } };
+    (initialJsonData.children || []).forEach((c, i) => {
+      const pal = PALETTE[i % PALETTE.length];
+      phaseColors[c.name] = { fill: pal[0], stroke: pal[1], collapsedFill: pal[2] };
+    });
+
+    const levelSpecificPalettes = {
+      0: { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+      2: { fill: "#6ab04c", stroke: "#508a38", collapsedFill: "#a3d391" },
+      3: { fill: "#f0932b", stroke: "#d0730f", collapsedFill: "#f6c07e" },
+      4: { fill: "#be2edd", stroke: "#a01cb3", collapsedFill: "#e08bf2" },
+      5: { fill: "#00a8ff", stroke: "#007ac1", collapsedFill: "#74d2ff" },
+      6: { fill: "#e55039", stroke: "#c23620", collapsedFill: "#f09a8d" },
+      default: { fill: "#747d8c", stroke: "#57606f", collapsedFill: "#a4b0be" }
+    };
+
+    const svgElement = d3.select("#tree-svg");
+    const initialSvgWidth = +svgElement.attr("width");
+    const initialSvgHeight = +svgElement.attr("height");
+    const margin = { top: 40, right: 120, bottom: 80, left: 450 };
+    let width = initialSvgWidth - margin.left - margin.right;
+    let height = initialSvgHeight - margin.top - margin.bottom;
+    const duration = 500;
+    let nodeCounter = 0;
+    const g = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+    const treemap = d3.tree().nodeSize([40, 0]);
+    let rootNode = d3.hierarchy(treeData, d => d.children);
+    rootNode.x0 = 0;
+    rootNode.y0 = 0;
+
+    if (rootNode.children) {
+      rootNode.children.forEach(d_child => {
+        if (d_child.children) { collapseBranch(d_child); }
+      });
+    }
+    updateTree(rootNode);
+
+    function collapseBranch(d) { if (d.children) { d._children = d.children; d._children.forEach(collapseBranch); d.children = null; } }
+    function expandBranch(d) { if (d._children) { d.children = d._children; d._children = null; } if (d.children) { d.children.forEach(expandBranch); } }
+    window.expandAll = () => { expandBranch(rootNode); updateTree(rootNode); };
+    window.collapseAll = () => { if (rootNode.children) { rootNode.children.forEach(collapseBranch); } updateTree(rootNode); };
+    window.resetView = () => { if (rootNode.children) { rootNode.children.forEach(d_child => { if (d_child.children || d_child._children) { collapseBranch(d_child); } }); } if (rootNode._children && !rootNode.children) { rootNode.children = rootNode._children; rootNode._children = null; } updateTree(rootNode); };
+
+    function updateTree(source) {
+      const treeLayoutData = treemap(rootNode);
+      let nodes = treeLayoutData.descendants();
+      let links = treeLayoutData.descendants().slice(1);
+
+      let minX = 0;
+      let maxX = 0;
+      if (nodes.length > 0) {
+        minX = d3.min(nodes, d => d.x);
+        maxX = d3.max(nodes, d => d.x);
+      }
+
+      let neededHeight = Math.max(initialSvgHeight, maxX - minX + margin.top + margin.bottom + 100);
+      svgElement.transition().duration(duration / 2).attr("height", neededHeight);
+      g.transition().duration(duration / 2).attr("transform", `translate(${margin.left},${margin.top - minX + 40})`);
+
+      nodes.forEach(d => { d.y = d.depth * 400; }); // Adjust horizontal separation if needed
+
+      const node = g.selectAll('g.node').data(nodes, d => d.id || (d.id = ++nodeCounter));
+      const nodeEnter = node.enter().append('g')
+        .attr('class', d => "node" + (d.children || d._children ? " node--internal" : " node--leaf") + (d._children ? " _children" : ""))
+        .attr('transform', d => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => { if (d.children) { d._children = d.children; d.children = null; } else if (d._children) { d.children = d._children; d._children = null; } updateTree(d); })
+        .style('cursor', d => (d.children || d._children) ? 'pointer' : 'default');
+
+      nodeEnter.append('circle').attr('r', 1e-6);
+
+      nodeEnter.append('text')
+        .attr('dy', '.35em')
+        .attr('x', d => d.children || d._children ? -14 : 14)
+        .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+        .style("fill-opacity", 1e-6)
+        .call(wrapText, 380);
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(duration)
+        .attr('transform', d => `translate(${d.y},${d.x})`)
+        .attr('class', d => "node" + (d.children ? " node--internal" : " node--leaf") + (d._children ? " node--internal _children" : ""));
+
+      nodeUpdate.select('circle').attr('r', 8.5)
+        .style('fill', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            if (d._children) return palette.collapsedFill;
+            if (d.children) return palette.fill;
+            return "#fff";
+        })
+        .style('stroke', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            return palette.stroke;
+        });
+      nodeUpdate.select('text').style("fill-opacity", 1).call(wrapText, 380);
+
+      const nodeExit = node.exit().transition().duration(duration).attr('transform', d => `translate(${source.y},${source.x})`).remove();
+      nodeExit.select('circle').attr('r', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
+
+      const link = g.selectAll('path.link').data(links, d => d.id);
+      const linkEnter = link.enter().insert('path', "g").attr('class', 'link').attr('d', d => { const o = { x: source.x0, y: source.y0 }; return diagonal(o, o); });
+
+      linkEnter.merge(link).transition().duration(duration).attr('d', d => diagonal(d, d.parent))
+        .style('stroke', d => {
+            const sourceNode = d.parent;
+            if (!sourceNode) return phaseColors.Default.stroke;
+            const l1AncestorName = sourceNode.data.originalStageName;
+            const colorPalette = phaseColors[l1AncestorName] || phaseColors.Default;
+            return colorPalette.stroke;
+        });
+      link.exit().transition().duration(duration).attr('d', d => { const o = { x: source.x, y: source.y }; return diagonal(o, o); }).remove();
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s, d) { return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`; }
+
+    function wrapText(textElements, maxWidth) {
+        const textPartColors = {
+            name: '#343a40',
+            count: '#0056b3'
+        };
+        const countRegex = /(\s\(Total Count: \d+\))$/;
+
+        textElements.each(function () {
+            const textD3 = d3.select(this);
+            const originalNodeText = textD3.datum().data.name;
+            const x = parseFloat(textD3.attr("x") || 0);
+            const initialDy = textD3.attr("dy");
+            const textAnchor = textD3.attr("text-anchor");
+            const lineHeight = 1.1;
+
+            textD3.text(null);
+
+            let namePart = originalNodeText;
+            let countPartText = "";
+
+            const countMatch = originalNodeText.match(countRegex);
+            if (countMatch && originalNodeText.endsWith(countMatch[0])) {
+                namePart = originalNodeText.substring(0, originalNodeText.length - countMatch[0].length).trim();
+                countPartText = countMatch[0].trim();
+            }
+
+            const tokens = [];
+            namePart.split(/\s+/).filter(Boolean).forEach(word => {
+                tokens.push({ text: word, type: 'name' });
+            });
+            if (countPartText) {
+                tokens.push({ text: countPartText, type: 'count' });
+            }
+
+            if (tokens.length === 0 && originalNodeText) {
+                tokens.push({ text: originalNodeText, type: 'name' });
+            }
+
+            let currentTspan = textD3.append("tspan").attr("x", x).attr("dy", initialDy);
+            if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+
+            let lineTokens = [];
+
+            for (let i = 0; i < tokens.length; i++) {
+                const tokenObj = tokens[i];
+
+                lineTokens.push(tokenObj);
+                currentTspan.text(lineTokens.map(t => t.text).join(" "));
+
+                if (currentTspan.node().getComputedTextLength() > maxWidth && lineTokens.length > 1) {
+                    lineTokens.pop();
+
+                    currentTspan.text(null);
+                    lineTokens.forEach((prevToken, idx) => {
+                        currentTspan.append("tspan")
+                            .text((idx > 0 ? " " : "") + prevToken.text)
+                            .style("fill", textPartColors[prevToken.type] || textPartColors.name)
+                            .style("font-weight", prevToken.type === 'count' ? "bold" : "normal");
+                    });
+
+                    lineTokens = [tokenObj];
+                    currentTspan = textD3.append("tspan").attr("x", x).attr("dy", lineHeight + "em");
+                    if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+                }
+            }
+
+            currentTspan.text(null);
+            lineTokens.forEach((token, idx) => {
+                currentTspan.append("tspan")
+                    .text((idx > 0 ? " " : "") + token.text)
+                    .style("fill", textPartColors[token.type] || textPartColors.name)
+                    .style("font-weight", token.type === 'count' ? "bold" : "normal");
+            });
+
+            if (textD3.selectAll("tspan > tspan").empty() && textD3.select("tspan").text().length === 0 && originalNodeText) {
+                let t = textD3.select("tspan");
+                let displayText = originalNodeText;
+                t.text(displayText).style("fill", textPartColors.name);
+                if (t.node() && t.node().getComputedTextLength() > maxWidth && displayText.length > 20) {
+                    let estimatedChars = Math.floor(maxWidth / (t.node().getComputedTextLength()/displayText.length) );
+                    displayText = displayText.substring(0, Math.max(0, estimatedChars - 3)) + "...";
+                    t.text(displayText);
+                }
+            }
+        });
+    }
+  </script>
+</body>
+</html>

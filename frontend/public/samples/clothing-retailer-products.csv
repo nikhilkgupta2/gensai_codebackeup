@@ -1,0 +1,9 @@
+product_name,sku,category,brand,quantity,price,supplier,warehouse_location,description
+Classic Cotton T-Shirt,CL-TEE-001,Tops,NorthThread,160,14.99,ThreadWorks Apparel,Main Warehouse,Core cotton crew neck
+Slim Fit Denim Jeans,CL-DNM-012,Bottoms,UrbanLoom,72,49.99,UrbanLoom Supply,Main Warehouse,Stretch denim jeans
+Lightweight Hoodie,CL-HDY-024,Outerwear,NorthThread,54,39.99,ThreadWorks Apparel,West Warehouse,Fleece pullover hoodie
+Performance Socks 3-Pack,CL-SCK-008,Accessories,StrideCo,190,12.99,StrideCo Wholesale,Main Warehouse,Breathable crew socks
+Linen Button Shirt,CL-SHT-018,Tops,HarborWear,38,44.95,HarborWear Supply,West Warehouse,Relaxed linen shirt
+Rain Jacket,CL-JKT-031,Outerwear,StormLine,26,79.99,StormLine Gear,East Warehouse,Water-resistant shell jacket
+Everyday Chinos,CL-CHN-015,Bottoms,UrbanLoom,66,42.5,UrbanLoom Supply,Main Warehouse,Slim everyday chinos
+Canvas Tote Bag,CL-BAG-007,Accessories,CarryWell,105,18.99,CarryWell Goods,East Warehouse,Heavy canvas tote

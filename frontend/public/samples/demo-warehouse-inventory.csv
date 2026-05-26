@@ -1,0 +1,5 @@
+warehouse_code,sku,quantity
+MAIN,EL-CHG-001,80
+MAIN,EL-MSE-014,60
+EAST,EL-AUD-031,30
+WEST,EL-STD-022,24

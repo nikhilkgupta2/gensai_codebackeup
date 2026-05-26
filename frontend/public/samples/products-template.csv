@@ -1,0 +1,2 @@
+product_name,sku,category,brand,quantity,price,supplier,warehouse_location,description
+Example Product,EX-100,Category,Brand,25,19.99,Example Supplier,Main Warehouse,Short product description

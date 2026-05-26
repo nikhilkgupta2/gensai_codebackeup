@@ -1,0 +1,712 @@
+{
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/tsconfig.node.json": {
+    "mtime": 1779356282.1022422,
+    "ast_hash": "514d68045032e2a7f6d1ca3bd90db121",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/tailwind.config.ts": {
+    "mtime": 1779478923.7385259,
+    "ast_hash": "61c08b54147b36b1cc3a68cede8198dc",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/package.json": {
+    "mtime": 1779627611.0868428,
+    "ast_hash": "4a8ea5e5ca8bbcee1e70287c81a00557",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/tsconfig.json": {
+    "mtime": 1779355358.8465123,
+    "ast_hash": "7dbe80a92b653e763f75e6cda20ded39",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/eslint.config.js": {
+    "mtime": 1779355358.8469894,
+    "ast_hash": "22ae4cb7c1504fd64255b93bc75e7a84",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/vite.config.ts": {
+    "mtime": 1779355358.8474858,
+    "ast_hash": "03c72bc7c454d8706f923f8685679397",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/postcss.config.js": {
+    "mtime": 1779355358.848039,
+    "ast_hash": "c735540bb63936a123bc867d950c9f69",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/App.tsx": {
+    "mtime": 1779691218.7372646,
+    "ast_hash": "41faae37aa8ee809e46a52ffcff1c6ba",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/main.tsx": {
+    "mtime": 1779355358.8494844,
+    "ast_hash": "753620a31c0186f0e0b37b0fc86f7288",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/vite-env.d.ts": {
+    "mtime": 1779356233.4086204,
+    "ast_hash": "0352474ba2918efe13895edbc3780d94",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/navigation/appNavigation.ts": {
+    "mtime": 1779626366.9556618,
+    "ast_hash": "5bf4300cbfbdf0466ba26eac66160feb",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/permissions/capabilities.ts": {
+    "mtime": 1779476591.9877362,
+    "ast_hash": "90fd3bbe3f1fd3ccc37b5ab1488d388d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ProtectedRoute.tsx": {
+    "mtime": 1779628524.5144129,
+    "ast_hash": "6e51fa115652b41588060289f39c95af",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/AppShell.tsx": {
+    "mtime": 1779623862.8995914,
+    "ast_hash": "1e84762706a773e4c1067ab2d7073ea9",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/Button.tsx": {
+    "mtime": 1779628506.7895296,
+    "ast_hash": "ad0af7dbecea55de8d1302b6534628b1",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/Input.tsx": {
+    "mtime": 1779628506.8662007,
+    "ast_hash": "be66d542bbf07668a2d0f1ccf7e78397",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/ConfirmDialog.tsx": {
+    "mtime": 1779478923.7426631,
+    "ast_hash": "5854a64e357304b8e281980641ac1de5",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/Card.tsx": {
+    "mtime": 1779478923.7410774,
+    "ast_hash": "2e10fb5edd64be6e453e06ddd0ef59fa",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/Breadcrumbs.tsx": {
+    "mtime": 1779478923.7431204,
+    "ast_hash": "b6a5fb5cde60bf41592b0122258e376b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/DataTable.tsx": {
+    "mtime": 1779626987.1139388,
+    "ast_hash": "4e211b864812b6cac05db5b2a930d33f",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/Badge.tsx": {
+    "mtime": 1779477232.4237816,
+    "ast_hash": "91e80d0e889590d2de7adb8881327948",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/index.ts": {
+    "mtime": 1779623899.162778,
+    "ast_hash": "2aa1357340554ece6dfd261531b2c9df",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/Modal.tsx": {
+    "mtime": 1779478923.7422373,
+    "ast_hash": "87cbc45073fc0028e2d3fda741df4f69",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/StatWidget.tsx": {
+    "mtime": 1779628507.0654888,
+    "ast_hash": "aadb764743f1d82248b4e4a4df36ceb6",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/Page.tsx": {
+    "mtime": 1779627852.060382,
+    "ast_hash": "bedda936479aca83f893b71c6b266e3d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/EmptyState.tsx": {
+    "mtime": 1779477232.4249988,
+    "ast_hash": "81e6eb52cc52b2b4879a390fc5d6a7c2",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/Select.tsx": {
+    "mtime": 1779628506.9556725,
+    "ast_hash": "f68b89c54a64856690b50794c324a44a",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/ui/LoadingState.tsx": {
+    "mtime": 1779478923.7418551,
+    "ast_hash": "7ade827ef9ebe39e5d61788ba7bf6c3f",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/landing/DashboardMockup.tsx": {
+    "mtime": 1779442214.309802,
+    "ast_hash": "afa021f7f00d3b34825f4f45366b652c",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/landing/SectionHeading.tsx": {
+    "mtime": 1779442009.3277593,
+    "ast_hash": "882821f26782e9cdd252a95a923bed3b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/landing/LandingContainer.tsx": {
+    "mtime": 1779441591.8325374,
+    "ast_hash": "caa7fc595149058dd6e7d9cbc22c0692",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/landing/LandingButton.tsx": {
+    "mtime": 1779442318.4573114,
+    "ast_hash": "f97b77f58ebce2bcb4cb981e872e6d3a",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/landing/MetricCard.tsx": {
+    "mtime": 1779441591.8342805,
+    "ast_hash": "3c1c889ffc340c763d313043476aed22",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/landing/FeatureCard.tsx": {
+    "mtime": 1779441591.8337798,
+    "ast_hash": "d167a0d982b43775b12a7c49b724f8c0",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/auth/PasswordField.tsx": {
+    "mtime": 1779691737.1589885,
+    "ast_hash": "38d912efea01da8e5a475348cb9856ba",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/auth/AuthShell.tsx": {
+    "mtime": 1779691709.550755,
+    "ast_hash": "67d4616671d34d68bd679bdaf20802e8",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/auth/AuthField.tsx": {
+    "mtime": 1779691737.08795,
+    "ast_hash": "8770f1ca189c92fe2bcbc42e7500748d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/dashboard/DashboardCharts.tsx": {
+    "mtime": 1779627838.8147264,
+    "ast_hash": "42bb947c761bf26efc72140858a62f88",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/components/notifications/NotificationCenter.tsx": {
+    "mtime": 1779627789.3940868,
+    "ast_hash": "66b71d6eff47086a62f17e726ede5da4",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/layouts/ContentLayout.tsx": {
+    "mtime": 1779623519.7469432,
+    "ast_hash": "cc0356525e29304204b1320d764fe113",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/layouts/AppLayout.tsx": {
+    "mtime": 1779623519.8394976,
+    "ast_hash": "eb458ac0acb410f39b972c7d98194761",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/layouts/SettingsLayout.tsx": {
+    "mtime": 1779623519.9053462,
+    "ast_hash": "262ee3cd6476b6f3820634cd8425084e",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/layouts/TopbarLayout.tsx": {
+    "mtime": 1779628507.2597754,
+    "ast_hash": "6c4d41139ec5fa9263e60d22bea0fd0b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/layouts/SidebarLayout.tsx": {
+    "mtime": 1779626380.9584045,
+    "ast_hash": "04901e1c7f0fd46ad6e69f0ea12ac4b8",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/inventory-api.ts": {
+    "mtime": 1779429610.4969022,
+    "ast_hash": "8d8f9652a043bef310564454c003cbb6",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/cn.ts": {
+    "mtime": 1779355617.3566968,
+    "ast_hash": "8595c2f874aa1ff8c7cc28df2999f354",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/user-api.ts": {
+    "mtime": 1779432775.4485512,
+    "ast_hash": "4eadebf7fdb009a394f0e13f7f3ef437",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/api.ts": {
+    "mtime": 1779628405.7973125,
+    "ast_hash": "5432bbfea1b7383f44f43219ca5a8d53",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/auth-api.ts": {
+    "mtime": 1779692631.8829658,
+    "ast_hash": "33158f6e31acb8fc564102b6ae7420d0",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/auth-store.ts": {
+    "mtime": 1779628405.7373595,
+    "ast_hash": "04b23d0b82cc8f6c47d8a23832065e75",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/procurement-api.ts": {
+    "mtime": 1779444815.6952121,
+    "ast_hash": "5cc87cab015efdcad0fac8a1d054bcf4",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/product-api.ts": {
+    "mtime": 1779430595.3137314,
+    "ast_hash": "e1b045f74dcafe92b90f1901a21c68bc",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/lib/dashboard-api.ts": {
+    "mtime": 1779444405.6124396,
+    "ast_hash": "43ded357c954eacf84edbf33b7a61ff8",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/RegisterPage.tsx": {
+    "mtime": 1779691737.3325553,
+    "ast_hash": "fbe0ba8860568b717e67c13c74fd0ee3",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/LoginPage.tsx": {
+    "mtime": 1779691737.2265503,
+    "ast_hash": "1821d120012d55ae158e95f2e28e0d01",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/ForgotPasswordPage.tsx": {
+    "mtime": 1779692684.5977483,
+    "ast_hash": "b2d9b5520bcfa288395807d20bfdf4fd",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/SuppliersPage.tsx": {
+    "mtime": 1779479028.0974603,
+    "ast_hash": "bf9c47b9752ecc90795def86c2daff5e",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/ProductsPage.tsx": {
+    "mtime": 1779479028.1020865,
+    "ast_hash": "4b1e736641d87590d5c001d5c5c43950",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/PurchaseOrdersPage.tsx": {
+    "mtime": 1779478987.775193,
+    "ast_hash": "30b01fd114e11a86a1fc06163bd5c40d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/InventoryPage.tsx": {
+    "mtime": 1779626884.1736202,
+    "ast_hash": "e001a5f25525c18e6eebc3844650da2d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/UsersPage.tsx": {
+    "mtime": 1779477768.78525,
+    "ast_hash": "7d416eea9abe74a62906f74362432dc9",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/LandingPage.tsx": {
+    "mtime": 1779441953.555017,
+    "ast_hash": "0719ac96b4edfe4b1b44becccf9a8275",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/PlaceholderPage.tsx": {
+    "mtime": 1779355617.6213434,
+    "ast_hash": "a360be2affe69e12b50ee0c7bc15fdac",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/PurchaseOrderDetailPage.tsx": {
+    "mtime": 1779440810.343755,
+    "ast_hash": "cb0e4f29b34718d54c387d42fa1b3982",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/UnauthorizedPage.tsx": {
+    "mtime": 1779476591.988449,
+    "ast_hash": "aef1fd8a1390879f5ead89033bc1b828",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/TenantDrilldownPage.tsx": {
+    "mtime": 1779441971.0943682,
+    "ast_hash": "770554198dc362a2fdfead1d064cfc0d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/ProductFormPage.tsx": {
+    "mtime": 1779479028.0987124,
+    "ast_hash": "6f86bdf125c052a2a4656556316a7f9c",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/DashboardPage.tsx": {
+    "mtime": 1779627740.93767,
+    "ast_hash": "fa9f3e9fc288c009bfe5eaa05265b686",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/InventoryTransactionsPage.tsx": {
+    "mtime": 1779628453.6488318,
+    "ast_hash": "dbc89effc9f26521ab2e071a306a883c",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/CtaSection.tsx": {
+    "mtime": 1779441953.5544274,
+    "ast_hash": "c94ed1f72ff2b4823cad29545e3745ae",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/LandingNavbar.tsx": {
+    "mtime": 1779441886.4635773,
+    "ast_hash": "81c16858742f1237fd10ac9ed55d78a5",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/DashboardPreviewSection.tsx": {
+    "mtime": 1779441953.5535107,
+    "ast_hash": "66298dbbc08604d3d8a097f098dee81c",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/StatsSection.tsx": {
+    "mtime": 1779441886.464606,
+    "ast_hash": "0123cdd28aca893e5b7730843666a553",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/BenefitsSection.tsx": {
+    "mtime": 1779441953.5538878,
+    "ast_hash": "12928c5b9befcaae7391a4227f04d138",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/TestimonialsSection.tsx": {
+    "mtime": 1779441953.554114,
+    "ast_hash": "66f89607b0d0afad45730ff1c860e1c8",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/HeroSection.tsx": {
+    "mtime": 1779442214.3093915,
+    "ast_hash": "e02be826eead173ed6dc91987d190c7e",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/LandingFooter.tsx": {
+    "mtime": 1779441953.5547838,
+    "ast_hash": "6cda8dbc7304ca414c3ae0282e601cf4",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/src/pages/landing/FeaturesSection.tsx": {
+    "mtime": 1779441886.4650123,
+    "ast_hash": "1c5a8f293033e47fdb4328ff5439b06e",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/__init__.py": {
+    "mtime": 1779355358.8296156,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/main.py": {
+    "mtime": 1779371428.0754557,
+    "ast_hash": "531fd11d34ceaaf92af1af72202ef94b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/core/enums.py": {
+    "mtime": 1779440353.5477407,
+    "ast_hash": "40e6dca026e6ad6f05a9994706bcec2c",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/core/config.py": {
+    "mtime": 1779692509.3234673,
+    "ast_hash": "d7bb47c6536761ed15efd2edce5fcb41",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/core/otp.py": {
+    "mtime": 1779692509.3850536,
+    "ast_hash": "aa1530b8bc1efeb0569367917eaf0fc1",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/core/security.py": {
+    "mtime": 1779358290.1576447,
+    "ast_hash": "f923700cbef2b0c85ed205bf8f54edb3",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/core/__init__.py": {
+    "mtime": 1779355358.829056,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/repositories/inventory_repository.py": {
+    "mtime": 1779429528.4937446,
+    "ast_hash": "7def4df731c73a2f39d23275f07dbd09",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/repositories/product_repository.py": {
+    "mtime": 1779430671.3881524,
+    "ast_hash": "03674436e0602a7fd56152152617255b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/repositories/tenant_repository.py": {
+    "mtime": 1779432628.0380597,
+    "ast_hash": "878c83881de58efc3d255121ac962051",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/repositories/user_repository.py": {
+    "mtime": 1779432618.3416293,
+    "ast_hash": "ca5007b2edd3a829d5c11debb2ba1b2f",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/repositories/dashboard_repository.py": {
+    "mtime": 1779444365.7436662,
+    "ast_hash": "4707dd700cc8d320ca506d583337905f",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/user.py": {
+    "mtime": 1779432618.1560025,
+    "ast_hash": "5ea84a81140ec31656096fbba1b0ac25",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/tenant.py": {
+    "mtime": 1779355537.1486728,
+    "ast_hash": "4588acb1b192e1786a04322352b04499",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/inventory_transaction.py": {
+    "mtime": 1779365463.8167145,
+    "ast_hash": "c49023146fd3b48b5d05d1c0ba43cb9d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/__init__.py": {
+    "mtime": 1779692473.216331,
+    "ast_hash": "ae1715ba60fff1f0f898f08667ea31f5",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/purchase_order.py": {
+    "mtime": 1779440543.38324,
+    "ast_hash": "4d1add9e29b65ecf5424188f460dc64e",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/product.py": {
+    "mtime": 1779361805.1023605,
+    "ast_hash": "54d901684d3e0aa05063e3347a1b1f0c",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/models/supplier.py": {
+    "mtime": 1779440353.548465,
+    "ast_hash": "44659889654d0653ce3fedf577fb7c61",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/auth.py": {
+    "mtime": 1779692549.2795837,
+    "ast_hash": "d163bc9ab79c084a02c1b1d28d0e6033",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/user.py": {
+    "mtime": 1779433786.457833,
+    "ast_hash": "2c111866aa0d85630dc8f36c10a85523",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/procurement.py": {
+    "mtime": 1779444815.6941607,
+    "ast_hash": "6ccafaa2f38bc59f1bca92521e964189",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/dashboard.py": {
+    "mtime": 1779444365.7451766,
+    "ast_hash": "40482a6cfbe079c239d1ed412de99647",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/common.py": {
+    "mtime": 1779430540.8535476,
+    "ast_hash": "1cc2c79b9bfaab7c3a7dc97d6d8ca66d",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/product.py": {
+    "mtime": 1779429444.402963,
+    "ast_hash": "74c252ed1b2566670c61fc39eb1e2437",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/schemas/inventory.py": {
+    "mtime": 1779429521.4455316,
+    "ast_hash": "c6b8309c0f612de5868a7430b2acf5ad",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/db/mixins.py": {
+    "mtime": 1779355537.0529346,
+    "ast_hash": "ccdba24e23bfda25cf99c2d60df7dea6",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/db/session.py": {
+    "mtime": 1779355358.8306835,
+    "ast_hash": "ea8f13ac87e6ea7444381a56ade85c39",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/db/__init__.py": {
+    "mtime": 1779355358.8312914,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/db/base.py": {
+    "mtime": 1779358247.6692648,
+    "ast_hash": "16deb2759f7de2cf86f328dce6b2d38b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/deps.py": {
+    "mtime": 1779476718.59828,
+    "ast_hash": "32a4ebe5ebb3e2f8399bb14298cd6a8a",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/__init__.py": {
+    "mtime": 1779355358.8357909,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/__init__.py": {
+    "mtime": 1779355358.8332624,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/router.py": {
+    "mtime": 1779440511.4584475,
+    "ast_hash": "a2b44e442a4a63f63adf6a5c91e16574",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/auth.py": {
+    "mtime": 1779692567.0547662,
+    "ast_hash": "2ac84b29b1a1378e6ea6270747e9f186",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/procurement.py": {
+    "mtime": 1779476748.8407555,
+    "ast_hash": "4b289443adaf2aa2f6c3e01598101f10",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/users.py": {
+    "mtime": 1779476868.9106715,
+    "ast_hash": "70338d0e630792b90ac487f96a44eaef",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/health.py": {
+    "mtime": 1779355358.8347387,
+    "ast_hash": "f7bba9a8b37f264ae9c50ae843ff301b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/__init__.py": {
+    "mtime": 1779431225.863341,
+    "ast_hash": "5a67e94e85231395172787c181cb160a",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/products.py": {
+    "mtime": 1779476718.5994318,
+    "ast_hash": "f5ab10b2ae2d1ff387ede5ffce91640a",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/dashboard.py": {
+    "mtime": 1779435703.239031,
+    "ast_hash": "c4f1683ea109c296cb295b1ce13dd067",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/api/v1/routes/inventory.py": {
+    "mtime": 1779435627.9386833,
+    "ast_hash": "e84b695a83185cbc9a771f0bdf069de7",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/auth_service.py": {
+    "mtime": 1779355537.5694685,
+    "ast_hash": "6dc903d648c6801a4902ed507989cf26",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/inventory_service.py": {
+    "mtime": 1779429546.1619089,
+    "ast_hash": "079d8a8abd3e06aa4a816a1736e16e8e",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/dashboard_service.py": {
+    "mtime": 1779444365.7445912,
+    "ast_hash": "406ba424d3643db255395664ecd1cf18",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/procurement_service.py": {
+    "mtime": 1779444815.6934283,
+    "ast_hash": "3d3d51075c690681ac90b87adb980c45",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/email_service.py": {
+    "mtime": 1779693677.119572,
+    "ast_hash": "c454b3080c03433d63813d137168ace5",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/user_service.py": {
+    "mtime": 1779432628.1066241,
+    "ast_hash": "2e705342b10cb8a57471928ecbb8c5ab",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/app/services/product_service.py": {
+    "mtime": 1779430568.794643,
+    "ast_hash": "ce1b2bb633e0c2981972a866247f5c96",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/scripts/seed_auth.py": {
+    "mtime": 1779358820.7359393,
+    "ast_hash": "e5aae03ae6130f01fcbf4a304cae576b",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/scripts/seed_procurement.py": {
+    "mtime": 1779444561.9672506,
+    "ast_hash": "63cff5e94f267d9ba7249e25e7c04016",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/scripts/__init__.py": {
+    "mtime": 1779358784.9239485,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/scripts/seed_products.py": {
+    "mtime": 1779429075.085052,
+    "ast_hash": "f7123a8075032185746184e833c17e97",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/alembic/env.py": {
+    "mtime": 1779358247.8048782,
+    "ast_hash": "f65a1459bc6c6825ee804e3c56f7dbb9",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/alembic/versions/20260522_0003_user_management_indexes.py": {
+    "mtime": 1779432618.2193375,
+    "ast_hash": "4b67c207011b6f23dbdcde1456ef8216",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/alembic/versions/20260521_0001_auth_tables.py": {
+    "mtime": 1779358524.5610027,
+    "ast_hash": "67b1c471816c4f586c96aba2f7790f24",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/alembic/versions/20260521_0002_product_inventory.py": {
+    "mtime": 1779361805.1026828,
+    "ast_hash": "a2c22197f7267874fae5c06a77818333",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/alembic/versions/20260522_0004_procurement.py": {
+    "mtime": 1779440857.9325144,
+    "ast_hash": "6ccacd49e9c5dc99b57e6d74c8886dd8",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/README.md": {
+    "mtime": 1779358256.1423404,
+    "ast_hash": "0577f318f8275340cdd38f154b86242f",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/docker-compose.yml": {
+    "mtime": 1779355358.8560905,
+    "ast_hash": "4e528e33875d6e4c659e8d933d41f672",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/frontend/index.html": {
+    "mtime": 1779355358.844503,
+    "ast_hash": "f3fba4c51b26a6902a0820c529aa7d44",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/requirements.txt": {
+    "mtime": 1779693748.0994608,
+    "ast_hash": "616e119353174b56de3a587fddc605d3",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/backend/requirements-dev.txt": {
+    "mtime": 1779359135.8282425,
+    "ast_hash": "5165dd38628975a71b498d20c89e31f5",
+    "semantic_hash": ""
+  },
+  "/Users/as-mac-1218/Desktop/capston/ims/docs/architecture.md": {
+    "mtime": 1779355358.8537507,
+    "ast_hash": "badf745dca4467032ffaea1227355918",
+    "semantic_hash": ""
+  }
+}

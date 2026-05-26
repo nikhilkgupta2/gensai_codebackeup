@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  color-scheme: light;
+  --ims-radius-sm: 0.375rem;
+  --ims-radius-md: 0.5rem;
+  --ims-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --ims-shadow-md: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.04);
+  --ims-font-sans: Inter, "Plus Jakarta Sans", "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    var(--ims-font-sans);
+}
+
+html.dark {
+  color-scheme: dark;
+  --ims-dark-bg: #000000;
+  --ims-dark-surface: #0b0b0b;
+  --ims-dark-surface-2: #111111;
+  --ims-dark-border: #1f1f1f;
+  --ims-dark-text: #ffffff;
+  --ims-dark-text-muted: #b3b3b3;
+  --ims-dark-text-subtle: #8a8a8a;
+}
+
+body {
+  margin: 0;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-family: var(--ims-font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.dark body {
+  background: var(--ims-dark-bg);
+  color: var(--ims-dark-text);
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.16);
+}
+
+html.dark ::selection {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@layer utilities {
+  .dark .bg-white,
+  .dark .bg-white\/90,
+  .dark .bg-white\/95,
+  .dark .supports-\[backdrop-filter\]\:bg-white\/85 {
+    background-color: color-mix(in oklab, var(--ims-dark-surface), black 10%);
+  }
+
+  .dark .bg-slate-100 {
+    background-color: var(--ims-dark-bg);
+  }
+
+  .dark .bg-slate-50,
+  .dark .bg-slate-50\/60,
+  .dark .bg-slate-50\/70,
+  .dark .bg-slate-50\/80,
+  .dark .bg-slate-50\/95,
+  .dark .bg-slate-50\/30 {
+    background-color: var(--ims-dark-surface-2);
+  }
+
+  .dark .bg-slate-950 {
+    background-color: var(--ims-dark-bg);
+  }
+
+  .dark .bg-slate-900 {
+    background-color: var(--ims-dark-surface);
+  }
+
+  .dark .text-slate-950,
+  .dark .text-slate-900,
+  .dark .text-slate-800,
+  .dark .text-slate-700 {
+    color: var(--ims-dark-text);
+  }
+
+  .dark .text-slate-600,
+  .dark .text-slate-500,
+  .dark .text-slate-400 {
+    color: var(--ims-dark-text-muted);
+  }
+
+  .dark .border-slate-100,
+  .dark .border-slate-200,
+  .dark .border-slate-300 {
+    border-color: var(--ims-dark-border);
+  }
+
+  .dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+  .dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--ims-dark-border);
+  }
+
+  .dark .shadow-sm,
+  .dark .shadow-md,
+  .dark .shadow-lg,
+  .dark .shadow-xl,
+  .dark .shadow-2xl {
+    --tw-shadow-color: rgb(0 0 0 / 0.35);
+  }
+
+  .dark .hover\:bg-slate-50:hover,
+  .dark .hover\:bg-slate-100:hover,
+  .dark .hover\:bg-slate-50\/80:hover {
+    background-color: color-mix(in oklab, var(--ims-dark-surface-2), white 6%);
+  }
+
+  .dark input,
+  .dark select,
+  .dark textarea {
+    background-color: var(--ims-dark-surface);
+    color: var(--ims-dark-text);
+    border-color: var(--ims-dark-border);
+  }
+
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: var(--ims-dark-text-subtle);
+  }
+}

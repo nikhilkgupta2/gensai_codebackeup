@@ -1,0 +1,5 @@
+name,contact_name,contact_email,contact_phone,address,status,notes
+Northline Electronics,Maya Patel,orders@northline.example,+1 555 2101,410 Circuit Avenue,active,Primary accessories vendor
+Acoustic Supply Co,Daniel Kim,fulfillment@acoustic.example,+1 555 2102,88 Sound Park,active,Audio supplier with 5 day lead time
+CablePoint Distribution,Sofia Reed,sales@cablepoint.example,+1 555 2103,19 Connector Road,active,Cables and adapters
+DeskForge Wholesale,Noah Brooks,ops@deskforge.example,+1 555 2104,305 Workspace Lane,active,Desk accessories

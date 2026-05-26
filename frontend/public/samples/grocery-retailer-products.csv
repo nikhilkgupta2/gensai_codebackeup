@@ -1,0 +1,9 @@
+product_name,sku,category,brand,quantity,price,supplier,warehouse_location,description
+Organic Jasmine Rice,GR-RCE-001,Pantry,HarvestField,240,7.99,FreshRoute Foods,Main Warehouse,2kg organic rice bag
+Cold Brew Coffee,GR-BEV-014,Beverages,BrewNorth,96,4.5,BrewNorth Wholesale,Cold Storage,Ready-to-drink cold brew
+Almond Milk 1L,GR-DRY-021,Dairy Alternatives,NutriSip,74,3.99,Green Valley Supply,Cold Storage,Unsweetened almond milk
+Tomato Pasta Sauce,GR-PAN-033,Pantry,Mama Rosa,130,5.25,FreshRoute Foods,Main Warehouse,Classic tomato sauce
+Greek Yogurt,GR-DRY-044,Dairy,PeakDairy,58,2.99,Green Valley Supply,Cold Storage,Single serve yogurt cup
+Granola Cereal,GR-BRK-009,Breakfast,HarvestField,88,6.75,FreshRoute Foods,Main Warehouse,Honey oat granola
+Sparkling Water Lime,GR-BEV-027,Beverages,AquaFizz,180,1.49,Beverage Depot,Main Warehouse,355ml lime sparkling water
+Frozen Mixed Berries,GR-FRZ-018,Frozen,OrchardLine,45,8.99,Cold Chain Foods,Freezer Room,1kg mixed berries
