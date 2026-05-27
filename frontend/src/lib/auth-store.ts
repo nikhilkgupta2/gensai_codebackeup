@@ -14,6 +14,7 @@ export type UserRole =
 export type AuthUser = {
   id: string;
   tenant_id: string | null;
+  company_name?: string | null;
   name: string;
   email: string;
   role: UserRole;

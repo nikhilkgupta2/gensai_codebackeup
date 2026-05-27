@@ -18,6 +18,7 @@ import { ProductDetailPage } from './pages/ProductDetailPage';
 import { ProductsPage } from './pages/ProductsPage';
 import { PurchaseOrderDetailPage } from './pages/PurchaseOrderDetailPage';
 import { PurchaseOrdersPage } from './pages/PurchaseOrdersPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { RegisterPage } from './pages/RegisterPage';
 import { VerifyEmailPage } from './pages/VerifyEmailPage';
 import { SuppliersPage } from './pages/SuppliersPage';
@@ -77,6 +78,7 @@ export function App() {
               <Route element={<RoleProtectedRoute allowedRoles={[ROLES.RETAILER_ADMIN, ROLES.AUDITOR]} />}>
                 <Route path="/audit-logs" element={<AuditLogsPage />} />
               </Route>
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
           </Route>
         </Routes>

@@ -77,6 +77,9 @@ export function getRouteLabel(pathname: string) {
       return { group: group.label, label: match.label };
     }
   }
+  if (pathname === '/profile') {
+    return { group: 'Workspace', label: 'Profile' };
+  }
   if (/^\/purchase-orders\/[^/]+$/.test(pathname)) {
     return { group: 'Operations', label: 'Purchase Order Detail' };
   }

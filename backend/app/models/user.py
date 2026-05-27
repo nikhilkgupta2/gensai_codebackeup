@@ -32,3 +32,9 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     assigned_warehouse: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
     tenant = relationship("Tenant", back_populates="users")
+
+    @property
+    def company_name(self) -> str | None:
+        if self.tenant is None:
+            return None
+        return self.tenant.company_name

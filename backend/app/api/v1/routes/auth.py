@@ -16,6 +16,7 @@ from app.schemas.auth import (
     RegisterRequest,
     ResendEmailOTPRequest,
     ResetPasswordRequest,
+    UpdateMeRequest,
     VerifyEmailOTPRequest,
     VerifyResetOTPRequest,
 )
@@ -97,3 +98,29 @@ def resend_email_otp(payload: ResendEmailOTPRequest, db: Session = Depends(get_d
 def me(current_user: User = Depends(get_current_user)) -> ApiResponse:
     user = AuthUser.model_validate(current_user)
     return ApiResponse(message="Current user fetched successfully.", data=user.model_dump(mode="json"))
+
+
+@router.put("/me", response_model=ApiResponse)
+def update_me(
+    payload: UpdateMeRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> ApiResponse:
+    data = payload.model_dump(exclude_unset=True)
+    if data.get("name") is not None:
+        current_user.name = data["name"]
+    if data.get("company_name") is not None:
+        if current_user.tenant is None:
+            from fastapi import HTTPException
+
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Company updates require a tenant user.")
+        current_user.tenant.company_name = data["company_name"]
+    if data.get("password"):
+        from app.core.security import hash_password
+
+        current_user.password_hash = hash_password(data["password"])
+
+    db.commit()
+    db.refresh(current_user)
+    user = AuthUser.model_validate(current_user)
+    return ApiResponse(message="Profile updated successfully.", data=user.model_dump(mode="json"))

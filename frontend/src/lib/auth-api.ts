@@ -75,6 +75,17 @@ export async function fetchCurrentUser() {
   return response.data.data;
 }
 
+export type UpdateCurrentUserPayload = {
+  name?: string;
+  company_name?: string;
+  password?: string;
+};
+
+export async function updateCurrentUser(payload: UpdateCurrentUserPayload) {
+  const response = await api.put<ApiEnvelope<AuthUser>>('/auth/me', payload);
+  return response.data.data;
+}
+
 export async function forgotPassword(payload: ForgotPasswordPayload) {
   const response = await api.post<ApiEnvelope<{ accepted: boolean }>>('/auth/forgot-password', payload);
   return response.data.data;

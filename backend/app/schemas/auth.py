@@ -68,6 +68,7 @@ class TokenResponse(BaseModel):
 class AuthUser(BaseModel):
     id: UUID
     tenant_id: UUID | None
+    company_name: str | None = Field(default=None, max_length=160)
     name: str
     email: str
     role: UserRole
@@ -76,6 +77,11 @@ class AuthUser(BaseModel):
     assigned_warehouse: str | None = None
 
     model_config = ConfigDict(from_attributes=True)
+
+class UpdateMeRequest(BaseModel):
+    name: str | None = Field(default=None, min_length=2, max_length=120)
+    company_name: str | None = Field(default=None, min_length=2, max_length=160)
+    password: str | None = Field(default=None, min_length=8, max_length=128)
 
 
 class AuthResponse(BaseModel):

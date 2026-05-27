@@ -107,6 +107,13 @@ export function TopbarLayout({ user, onOpenMobile, onLogout }: TopbarLayoutProps
             <button
               className="mt-1 w-full rounded-md px-2 py-2 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50"
               type="button"
+              onClick={() => navigate('/profile')}
+            >
+              Profile
+            </button>
+            <button
+              className="w-full rounded-md px-2 py-2 text-left text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+              type="button"
               onClick={onLogout}
             >
               Sign out
