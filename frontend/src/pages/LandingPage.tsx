@@ -10,7 +10,7 @@ import { TestimonialsSection } from './landing/TestimonialsSection';
 
 export function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-slate-950">
+    <div className="landing-pure-black min-h-screen bg-white text-slate-950 dark:bg-black dark:text-white">
       <LandingNavbar />
       <main>
         <HeroSection />

@@ -28,6 +28,7 @@ class User(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         default=UserRole.RETAILER_ADMIN,
     )
     is_active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
+    is_email_verified: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     assigned_warehouse: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
     tenant = relationship("Tenant", back_populates="users")

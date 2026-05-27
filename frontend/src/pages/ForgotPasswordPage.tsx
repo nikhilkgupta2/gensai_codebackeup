@@ -124,14 +124,14 @@ export function ForgotPasswordPage() {
       footer={
         <>
           Remembered your password?{' '}
-          <Link className="font-medium text-white underline-offset-4 transition hover:underline" to="/login">
+          <Link className="font-medium text-slate-950 underline-offset-4 transition hover:underline dark:text-white" to="/login">
             Back to login
           </Link>
         </>
       }
     >
       {formError ? (
-        <p className="mb-4 flex items-center gap-2 rounded-md border border-red-400/30 bg-red-400/10 px-3 py-2 text-sm text-red-200">
+        <p className="mb-4 flex items-center gap-2 rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-700 dark:border-red-400/30 dark:bg-red-400/10 dark:text-red-200">
           <AlertCircle className="h-4 w-4" />
           {formError}
         </p>
@@ -148,7 +148,10 @@ export function ForgotPasswordPage() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
-          <Button className="h-10 w-full rounded-md" disabled={forgotMutation.isPending}>
+          <Button
+            className="h-10 w-full rounded-md dark:border dark:border-white dark:bg-[#ffffff] dark:text-black dark:hover:bg-[#f2f2f2]"
+            disabled={forgotMutation.isPending}
+          >
             {forgotMutation.isPending ? (
               <span className="inline-flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -163,8 +166,8 @@ export function ForgotPasswordPage() {
 
       {step === 'otp' ? (
         <form className="space-y-4" onSubmit={submitOTP}>
-          <div className="rounded-md border border-white/15 bg-white/5 px-3 py-2 text-sm text-white/70">
-            Code sent to <span className="font-semibold text-white">{email}</span>
+          <div className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:border-white/15 dark:bg-white/5 dark:text-white/70">
+            Code sent to <span className="font-semibold text-slate-900 dark:text-white">{email}</span>
           </div>
           <AuthField
             label="Reset code"
@@ -175,7 +178,10 @@ export function ForgotPasswordPage() {
             value={otp}
             onChange={(event) => setOtp(event.target.value.replace(/\D/g, '').slice(0, 6))}
           />
-          <Button className="h-10 w-full rounded-md" disabled={verifyMutation.isPending}>
+          <Button
+            className="h-10 w-full rounded-md dark:border dark:border-white dark:bg-[#ffffff] dark:text-black dark:hover:bg-[#f2f2f2]"
+            disabled={verifyMutation.isPending}
+          >
             {verifyMutation.isPending ? (
               <span className="inline-flex items-center gap-2">
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -187,7 +193,7 @@ export function ForgotPasswordPage() {
           </Button>
           <button
             type="button"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white/70 transition hover:bg-white/5 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:text-white/70 dark:hover:bg-white/5 dark:hover:text-white"
             disabled={cooldown > 0 || forgotMutation.isPending}
             onClick={resendCode}
           >
@@ -227,7 +233,7 @@ export function ForgotPasswordPage() {
       ) : null}
 
       {step === 'success' ? (
-        <div className="rounded-md border border-emerald-400/30 bg-emerald-400/10 px-4 py-4 text-sm text-emerald-200">
+        <div className="rounded-md border border-emerald-100 bg-emerald-50 px-4 py-4 text-sm text-emerald-800 dark:border-emerald-400/30 dark:bg-emerald-400/10 dark:text-emerald-200">
           <div className="flex gap-3">
             <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
             <div>

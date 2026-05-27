@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, CheckCircle2, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Eye, EyeOff, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -35,30 +35,54 @@ const ROLE_LABELS: Record<UserRole, string> = {
   procurement_manager: 'Procurement Manager',
 };
 
-const userSchema = z
-  .object({
-    name: z.string().min(2, 'Name must be at least 2 characters.'),
-    email: z.string().email('Enter a valid email address.'),
-    password: z.string().optional(),
-    role: z.enum(['super_admin', 'retailer_admin', 'inventory_manager', 'warehouse_staff', 'auditor', 'procurement_manager']),
-    tenant_id: z.string().optional(),
-    is_active: z.boolean(),
-    assigned_warehouse: z.string().max(255, 'Warehouse name is too long.').optional(),
-  })
-  .superRefine((value, ctx) => {
-    if (value.role !== 'super_admin' && value.tenant_id !== undefined && value.tenant_id.trim().length > 0) {
-      const uuidLike = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-      if (!uuidLike.test(value.tenant_id.trim())) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['tenant_id'],
-          message: 'Tenant ID must be a valid UUID.',
-        });
-      }
-    }
-  });
+const passwordPolicyMessage = 'Password must be at least 8 characters and include 1 capital, 1 number, and 1 special character.';
 
-type UserFormData = z.infer<typeof userSchema>;
+function isStrongPassword(value: string) {
+  const password = value.trim();
+  const okLength = password.length >= 8;
+  const okCapital = /[A-Z]/.test(password);
+  const okNumber = /\d/.test(password);
+  const okSpecial = /[^A-Za-z0-9]/.test(password);
+  return okLength && okCapital && okNumber && okSpecial;
+}
+
+const baseUserSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters.'),
+  email: z.string().email('Enter a valid email address.'),
+  role: z.enum(['super_admin', 'retailer_admin', 'inventory_manager', 'warehouse_staff', 'auditor', 'procurement_manager']),
+  tenant_id: z.string().optional(),
+  is_active: z.boolean(),
+  assigned_warehouse: z.string().max(255, 'Warehouse name is too long.').optional(),
+});
+
+function tenantIdValidation(value: z.infer<typeof baseUserSchema>, ctx: z.RefinementCtx) {
+  if (value.role !== 'super_admin' && value.tenant_id !== undefined && value.tenant_id.trim().length > 0) {
+    const uuidLike = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    if (!uuidLike.test(value.tenant_id.trim())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['tenant_id'],
+        message: 'Tenant ID must be a valid UUID.',
+      });
+    }
+  }
+}
+
+const createUserSchema = baseUserSchema.extend({
+  password: z
+    .string()
+    .trim()
+    .min(1, 'Password is required.')
+    .refine((value) => isStrongPassword(value), passwordPolicyMessage),
+}).superRefine(tenantIdValidation);
+
+const editUserSchema = baseUserSchema.extend({
+  password: z
+    .union([z.literal(''), z.string().trim().refine((value) => isStrongPassword(value), passwordPolicyMessage)])
+    .optional(),
+}).superRefine(tenantIdValidation);
+
+type UserFormData = z.infer<typeof baseUserSchema> & { password?: string };
 
 type UserModalState =
   | { mode: 'create'; user?: undefined }
@@ -137,7 +161,8 @@ function UserFormModal({
       : ['warehouse_staff', 'inventory_manager', 'procurement_manager', 'auditor', 'retailer_admin'];
 
   const form = useForm<UserFormData>({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(isEdit ? editUserSchema : createUserSchema),
+    mode: 'onChange',
     values: {
       name: user?.name ?? '',
       email: user?.email ?? '',
@@ -149,6 +174,7 @@ function UserFormModal({
     },
   });
   const watchedRole = form.watch('role');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   if (!state) {
     return null;
@@ -199,17 +225,18 @@ function UserFormModal({
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="space-y-2 text-sm font-medium">
               <span>{isEdit ? 'New password' : 'Password'}</span>
-              <Input
-                type="password"
-                {...form.register('password', {
-                  validate: (value) => {
-                    if (isEdit && !value) {
-                      return true;
-                    }
-                    return value && value.length >= 8 ? true : 'Password must be at least 8 characters.';
-                  },
-                })}
-              />
+              <div className="relative">
+                <Input type={passwordVisible ? 'text' : 'password'} className="pr-10" {...form.register('password')} />
+                <button
+                  type="button"
+                  className="absolute right-2 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-md text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-white/60 dark:hover:bg-white/5 dark:hover:text-white dark:focus:ring-white/20"
+                  onClick={() => setPasswordVisible((value) => !value)}
+                  aria-label={passwordVisible ? 'Hide password' : 'Show password'}
+                  title={passwordVisible ? 'Hide password' : 'Show password'}
+                >
+                  {passwordVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
               {form.formState.errors.password ? (
                 <span className="block text-xs font-normal text-red-600">{form.formState.errors.password.message}</span>
               ) : null}
@@ -267,7 +294,10 @@ function UserFormModal({
             <Button type="button" className="border border-slate-200 bg-white text-slate-700 hover:bg-slate-50" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" disabled={isSaving}>
+            <Button
+              type="submit"
+              disabled={isSaving || !form.formState.isValid}
+            >
               {isSaving ? 'Saving...' : isEdit ? 'Save changes' : 'Create user'}
             </Button>
           </div>

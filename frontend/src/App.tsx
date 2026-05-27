@@ -19,6 +19,7 @@ import { ProductsPage } from './pages/ProductsPage';
 import { PurchaseOrderDetailPage } from './pages/PurchaseOrderDetailPage';
 import { PurchaseOrdersPage } from './pages/PurchaseOrdersPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { VerifyEmailPage } from './pages/VerifyEmailPage';
 import { SuppliersPage } from './pages/SuppliersPage';
 import { SupplierProfilePage } from './pages/SupplierProfilePage';
 import { TenantDrilldownPage } from './pages/TenantDrilldownPage';
@@ -37,6 +38,7 @@ export function App() {
           <Route element={<GuestRoute />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/verify-email" element={<VerifyEmailPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           </Route>
           <Route path="/unauthorized" element={<UnauthorizedPage />} />

@@ -11,10 +11,23 @@ class RegisterRequest(BaseModel):
     password: str = Field(min_length=8, max_length=128)
     company_name: str = Field(min_length=2, max_length=160)
 
+class RegisterPendingVerificationResponse(BaseModel):
+    pending_verification: bool = True
+    email: EmailStr
+
 
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str = Field(min_length=1, max_length=128)
+
+class GoogleLoginRequest(BaseModel):
+    email: EmailStr
+
+class GoogleIdTokenRequest(BaseModel):
+    credential: str = Field(min_length=20, max_length=4096)
+
+class GoogleClientIdResponse(BaseModel):
+    client_id: str
 
 
 class ForgotPasswordRequest(BaseModel):
@@ -24,6 +37,13 @@ class ForgotPasswordRequest(BaseModel):
 class VerifyResetOTPRequest(BaseModel):
     email: EmailStr
     otp: str = Field(pattern=r"^\d{6}$")
+
+class VerifyEmailOTPRequest(BaseModel):
+    email: EmailStr
+    otp: str = Field(pattern=r"^\d{6}$")
+
+class ResendEmailOTPRequest(BaseModel):
+    email: EmailStr
 
 
 class VerifyResetOTPResponse(BaseModel):
@@ -52,6 +72,7 @@ class AuthUser(BaseModel):
     email: str
     role: UserRole
     is_active: bool
+    is_email_verified: bool
     assigned_warehouse: str | None = None
 
     model_config = ConfigDict(from_attributes=True)

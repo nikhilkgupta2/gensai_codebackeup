@@ -80,6 +80,7 @@ def upsert_user(db: Session, *, tenant: Tenant, user_data: dict[str, object]) ->
     user.role = user_data["role"]
     user.tenant_id = tenant_id
     user.is_active = True
+    user.is_email_verified = True
     user.assigned_warehouse = user_data.get("assigned_warehouse")
     user.password_hash = hash_password(SEED_PASSWORD)
 

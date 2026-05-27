@@ -1,5 +1,6 @@
 from app.models.inventory_transaction import InventoryTransaction
 from app.models.audit_log import AuditLog, StockAdjustmentRequest
+from app.models.email_verification import EmailVerificationOTP
 from app.models.notification import Notification
 from app.models.password_reset import PasswordResetOTP
 from app.models.product import Product
@@ -14,6 +15,7 @@ __all__ = [
     "InventoryTransaction",
     "AuditLog",
     "StockAdjustmentRequest",
+    "EmailVerificationOTP",
     "Notification",
     "PasswordResetOTP",
     "Product",

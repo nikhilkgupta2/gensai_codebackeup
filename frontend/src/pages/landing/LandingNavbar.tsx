@@ -2,6 +2,7 @@ import { BarChart3, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { ThemeToggle } from '../../components/ThemeToggle';
 import { LandingButton } from '../../components/landing/LandingButton';
 import { LandingContainer } from '../../components/landing/LandingContainer';
 import { cn } from '../../lib/cn';
@@ -45,23 +46,35 @@ export function LandingNavbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <LandingButton to="/login" variant="ghost">
+          <ThemeToggle />
+          <LandingButton
+            to="/login"
+            variant="secondary"
+            className="h-11 border-slate-950 text-slate-950 hover:border-slate-950 dark:border-white/40 dark:bg-transparent dark:text-white dark:hover:border-white/60 dark:hover:bg-white/5"
+          >
             Login
           </LandingButton>
-          <LandingButton to="/register" variant="primary">
+          <LandingButton
+            to="/register"
+            variant="primary"
+            className="dark:border dark:border-white/40 dark:bg-[#ffffff] dark:text-black dark:hover:bg-[#b5b5b5]"
+          >
             Start free
           </LandingButton>
         </div>
 
-        <button
-          type="button"
-          className="inline-grid h-10 w-10 place-items-center rounded-md border border-slate-200 text-slate-700 lg:hidden"
-          aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((value) => !value)}
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-grid h-10 w-10 place-items-center rounded-md border border-slate-200 text-slate-700"
+            aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((value) => !value)}
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </LandingContainer>
 
       <div className={cn('border-t border-slate-200 bg-white lg:hidden', !isOpen && 'hidden')}>
@@ -79,10 +92,18 @@ export function LandingNavbar() {
             ))}
           </nav>
           <div className="grid grid-cols-2 gap-3">
-            <LandingButton to="/login" variant="secondary">
+            <LandingButton
+              to="/login"
+              variant="secondary"
+              className="border-slate-950 text-slate-950 hover:border-slate-950 dark:border-white/40 dark:bg-transparent dark:text-white dark:hover:border-white/60 dark:hover:bg-white/5"
+            >
               Login
             </LandingButton>
-            <LandingButton to="/register" variant="primary">
+            <LandingButton
+              to="/register"
+              variant="primary"
+              className="dark:border dark:border-white/40 dark:bg-[#a8a8a8] dark:text-black dark:hover:bg-[#b5b5b5]"
+            >
               Start free
             </LandingButton>
           </div>

@@ -22,19 +22,39 @@ class EmailService:
 
         message = EmailMessage()
         message["Subject"] = "Your IMS password reset code"
-        message["From"] = settings.smtp_from_email
+        message["From"] = settings.smtp_from_email_effective
         message["To"] = to_email
         message.set_content(self._text_body(otp))
         message.add_alternative(self._html_body(otp), subtype="html")
 
         try:
             context = ssl.create_default_context(cafile=certifi.where())
-            with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=15) as smtp:
+            with smtplib.SMTP(settings.smtp_host_effective, settings.smtp_port, timeout=15) as smtp:
                 smtp.starttls(context=context)
-                smtp.login(settings.smtp_username, settings.smtp_password)
+                smtp.login(settings.smtp_username_effective, settings.smtp_password_effective)
                 smtp.send_message(message)
         except Exception as exc:
             raise EmailDeliveryError("Password reset email could not be sent.") from exc
+
+    def send_email_verification_otp(self, *, to_email: str, otp: str) -> None:
+        if not settings.smtp_configured:
+            raise EmailConfigurationError("SMTP settings are not configured.")
+
+        message = EmailMessage()
+        message["Subject"] = "Your IMS verification code"
+        message["From"] = settings.smtp_from_email_effective
+        message["To"] = to_email
+        message.set_content(self._verify_text_body(otp))
+        message.add_alternative(self._verify_html_body(otp), subtype="html")
+
+        try:
+            context = ssl.create_default_context(cafile=certifi.where())
+            with smtplib.SMTP(settings.smtp_host_effective, settings.smtp_port, timeout=15) as smtp:
+                smtp.starttls(context=context)
+                smtp.login(settings.smtp_username_effective, settings.smtp_password_effective)
+                smtp.send_message(message)
+        except Exception as exc:
+            raise EmailDeliveryError("Verification email could not be sent.") from exc
 
     @staticmethod
     def _text_body(otp: str) -> str:
@@ -75,6 +95,56 @@ class EmailService:
                         </p>
                         <p style="margin:16px 0 0;color:#64748b;font-size:13px;line-height:1.7;">
                           If you did not request this reset, you can safely ignore this email.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+        </html>
+        """
+
+    @staticmethod
+    def _verify_text_body(otp: str) -> str:
+        return (
+            "IMS email verification\n\n"
+            f"Your one-time verification code is: {otp}\n\n"
+            "This code expires in 10 minutes and can be used only once. "
+            "If you did not create an account, ignore this email."
+        )
+
+    @staticmethod
+    def _verify_html_body(otp: str) -> str:
+        return f"""
+        <!doctype html>
+        <html>
+          <body style="margin:0;background:#f8fafc;font-family:Inter,Arial,sans-serif;color:#0f172a;">
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f8fafc;padding:32px;">
+              <tr>
+                <td align="center">
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:520px;background:#ffffff;border:1px solid #e2e8f0;">
+                    <tr>
+                      <td style="padding:28px 32px;border-bottom:1px solid #e2e8f0;">
+                        <div style="font-size:18px;font-weight:700;letter-spacing:-0.02em;">IMS Inventory Cloud</div>
+                        <div style="margin-top:4px;font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:0.14em;">Email verification</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding:32px;">
+                        <h1 style="margin:0;font-size:22px;line-height:1.3;">Verify your email</h1>
+                        <p style="margin:12px 0 0;color:#475569;font-size:14px;line-height:1.7;">
+                          Enter this one-time code in IMS to finish creating your workspace.
+                        </p>
+                        <div style="margin:28px 0;padding:18px 20px;background:#f1f5f9;border:1px solid #e2e8f0;text-align:center;font-size:32px;font-weight:700;letter-spacing:0.22em;">
+                          {otp}
+                        </div>
+                        <p style="margin:0;color:#475569;font-size:14px;line-height:1.7;">
+                          This code expires in <strong>10 minutes</strong> and can be used only once.
+                        </p>
+                        <p style="margin:16px 0 0;color:#64748b;font-size:13px;line-height:1.7;">
+                          If you did not create an account, you can safely ignore this email.
                         </p>
                       </td>
                     </tr>

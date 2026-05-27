@@ -85,6 +85,7 @@ class UserRepository:
         tenant_id: UUID | None,
         role: UserRole = UserRole.RETAILER_ADMIN,
         is_active: bool = True,
+        is_email_verified: bool = False,
         assigned_warehouse: str | None = None,
     ) -> User:
         user = User(
@@ -94,6 +95,7 @@ class UserRepository:
             tenant_id=tenant_id,
             role=role,
             is_active=is_active,
+            is_email_verified=is_email_verified,
             assigned_warehouse=assigned_warehouse,
         )
         self.db.add(user)

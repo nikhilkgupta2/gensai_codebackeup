@@ -12,17 +12,17 @@ type AuthFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 export const AuthField = forwardRef<HTMLInputElement, AuthFieldProps>(
   ({ label, icon: Icon, error, ...props }, ref) => {
   return (
-    <label className="block space-y-1.5 text-sm font-medium text-white/80">
+    <label className="block space-y-1.5 text-sm font-medium text-slate-700 dark:text-white/80">
       <span className="text-xs">{label}</span>
       <div className="group relative">
-        <Icon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45 transition group-focus-within:text-white/80" />
+        <Icon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 transition group-focus-within:text-slate-700 dark:text-white/45 dark:group-focus-within:text-white/80" />
         <Input
           ref={ref}
-          className="h-10 rounded-md border-white/20 bg-[#111] pl-10 text-white shadow-none transition placeholder:text-white/40 hover:border-white/30 focus:border-white/50 focus:bg-[#0f0f0f] focus:shadow-[0_0_0_4px_rgba(255,255,255,0.06)]"
+          className="h-10 rounded-md border-slate-200 bg-slate-50/70 pl-10 shadow-none transition focus:bg-white dark:!border-white/95 dark:bg-[#111] dark:text-white dark:placeholder:text-white/40 dark:hover:!border-white/50 dark:focus:!border-white/70 dark:focus:bg-[#0f0f0f] dark:focus:shadow-[0_0_0_4px_rgba(255,255,255,0.06)]"
           {...props}
         />
       </div>
-      {error ? <span className="block text-xs font-normal text-red-200">{error}</span> : null}
+      {error ? <span className="block text-xs font-normal text-red-600 dark:text-red-200">{error}</span> : null}
     </label>
   );
   },

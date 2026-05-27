@@ -18,6 +18,7 @@ export type AuthUser = {
   email: string;
   role: UserRole;
   is_active: boolean;
+  is_email_verified?: boolean;
   assigned_warehouse?: string | null;
 };
 

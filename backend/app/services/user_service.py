@@ -76,6 +76,7 @@ class UserService:
                 tenant_id=tenant_id,
                 role=role,
                 is_active=payload.is_active,
+                is_email_verified=True,
                 assigned_warehouse=self._normalize_warehouse(payload.assigned_warehouse, role),
             )
         except IntegrityError as exc:

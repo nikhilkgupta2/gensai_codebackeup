@@ -189,7 +189,7 @@ export function WarehousesPage() {
               <Input className="h-11" placeholder="Code" value={warehouseForm.code} onChange={(event) => setWarehouseForm((prev) => ({ ...prev, code: event.target.value }))} />
               <Input className="h-11" placeholder="Manager" value={warehouseForm.manager} onChange={(event) => setWarehouseForm((prev) => ({ ...prev, manager: event.target.value }))} />
               <Input className="h-11" placeholder="Address" value={warehouseForm.address} onChange={(event) => setWarehouseForm((prev) => ({ ...prev, address: event.target.value }))} />
-              <Button className="h-11 sm:col-span-2" disabled={createWarehouseMutation.isPending}>
+              <Button className="h-11 sm:col-span-2 dark:border dark:border-white dark:bg-[#ffffff] dark:text-black dark:hover:bg-[#f2f2f2]" disabled={createWarehouseMutation.isPending}>
                 <Plus className="mr-2 h-4 w-4" />
                 {createWarehouseMutation.isPending ? 'Creating...' : 'Create warehouse'}
               </Button>
@@ -303,7 +303,7 @@ export function WarehousesPage() {
                   assignForm.quantity === '' ||
                   Number(assignForm.quantity) < 0
                 }
-                className="h-11 w-full"
+                className="h-11 w-full dark:border dark:border-white dark:bg-[#ffffff] dark:text-black dark:hover:bg-[#f2f2f2]"
               >
                 {assignInventoryMutation.isPending ? 'Assigning...' : 'Assign stock'}
               </Button>
@@ -371,7 +371,7 @@ export function WarehousesPage() {
                   Number(transferForm.quantity) <= 0 ||
                   (selectedSourceStock ? Number(transferForm.quantity) > selectedSourceStock.quantity : true)
                 }
-                className="h-11 w-full"
+                className="h-11 w-full dark:border dark:border-white dark:bg-[#ffffff] dark:text-black dark:hover:bg-[#f2f2f2]"
               >
                 {createTransferMutation.isPending ? 'Requesting...' : 'Request transfer'}
               </Button>

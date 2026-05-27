@@ -32,9 +32,17 @@ class Settings(BaseSettings):
     smtp_username: str | None = Field(default=None, alias="SMTP_USERNAME")
     smtp_password: str | None = Field(default=None, alias="SMTP_PASSWORD")
     smtp_from_email: str | None = Field(default=None, alias="SMTP_FROM_EMAIL")
+    email: str | None = Field(default=None, alias="EMAIL")
+    email_secret_code: str | None = Field(default=None, alias="EMAIL_SECRET_CODE")
+    google_client_id: str | None = Field(default=None, alias="GOOGLE_CLIENT_ID")
+    google_client_secret: str | None = Field(default=None, alias="GOOGLE_CLIENT_SECRET")
     password_reset_otp_expire_minutes: int = Field(default=10, alias="PASSWORD_RESET_OTP_EXPIRE_MINUTES")
     password_reset_resend_cooldown_seconds: int = Field(default=60, alias="PASSWORD_RESET_RESEND_COOLDOWN_SECONDS")
     password_reset_max_attempts: int = Field(default=5, alias="PASSWORD_RESET_MAX_ATTEMPTS")
+    email_verification_otp_expire_minutes: int = Field(default=10, alias="EMAIL_VERIFICATION_OTP_EXPIRE_MINUTES")
+    email_verification_resend_cooldown_seconds: int = Field(default=30, alias="EMAIL_VERIFICATION_RESEND_COOLDOWN_SECONDS")
+    email_verification_max_attempts: int = Field(default=5, alias="EMAIL_VERIFICATION_MAX_ATTEMPTS")
+    email_verification_max_resends: int = Field(default=3, alias="EMAIL_VERIFICATION_MAX_RESENDS")
 
     @property
     def backend_cors_origins(self) -> list[str]:
@@ -45,8 +53,38 @@ class Settings(BaseSettings):
         ]
 
     @property
+    def smtp_host_effective(self) -> str | None:
+        if self.smtp_host:
+            return self.smtp_host
+        if self.email:
+            return "smtp.gmail.com"
+        return None
+
+    @property
+    def smtp_username_effective(self) -> str | None:
+        return self.smtp_username or self.email
+
+    @property
+    def smtp_password_effective(self) -> str | None:
+        value = self.smtp_password or self.email_secret_code
+        if not value:
+            return None
+        return value.replace(" ", "")
+
+    @property
+    def smtp_from_email_effective(self) -> str | None:
+        return self.smtp_from_email or self.email
+
+    @property
     def smtp_configured(self) -> bool:
-        return all([self.smtp_host, self.smtp_username, self.smtp_password, self.smtp_from_email])
+        return all(
+            [
+                self.smtp_host_effective,
+                self.smtp_username_effective,
+                self.smtp_password_effective,
+                self.smtp_from_email_effective,
+            ]
+        )
 
 
 @lru_cache

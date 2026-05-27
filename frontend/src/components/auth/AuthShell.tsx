@@ -24,23 +24,23 @@ const operationCards: Array<{ icon: ComponentType<{ className?: string }>; label
 
 export function AuthShell({ title, description, children, footer }: AuthShellProps) {
   return (
-    <main className="relative grid min-h-screen place-items-center overflow-hidden bg-[#242424] px-4 py-6 text-white sm:px-6 lg:px-8">
-      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:48px_48px] opacity-20" />
+    <main className="relative grid min-h-screen place-items-center overflow-hidden bg-slate-100 px-4 py-6 text-slate-950 dark:bg-[#242424] dark:text-white sm:px-6 lg:px-8">
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(15,23,42,0.026)_1px,transparent_1px),linear-gradient(0deg,rgba(15,23,42,0.018)_1px,transparent_1px)] bg-[size:48px_48px] dark:bg-[linear-gradient(120deg,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,0.035)_1px,transparent_1px)] dark:opacity-20" />
 
       <motion.section
         initial={{ opacity: 0, y: 8, scale: 0.995 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        className="relative grid w-full max-w-[1120px] overflow-hidden rounded-md border border-white bg-black shadow-[0_18px_60px_rgba(0,0,0,0.55)] lg:min-h-[720px] lg:grid-cols-2"
+        className="relative grid w-full max-w-[1120px] overflow-hidden rounded-md bg-white shadow-[0_18px_60px_rgba(15,23,42,0.14)] dark:bg-black dark:shadow-[0_18px_60px_rgba(0,0,0,0.55)] lg:min-h-[720px] lg:grid-cols-2"
       >
-        <div className="flex min-h-[620px] flex-col bg-black px-6 py-7 sm:px-10 lg:px-16">
+        <div className="flex min-h-[620px] flex-col bg-white px-6 py-7 dark:bg-black sm:px-10 lg:px-16">
           <Link to="/" className="flex w-fit items-center gap-3 rounded-md transition hover:opacity-80" aria-label="IMS home">
-            <span className="grid h-9 w-9 place-items-center rounded-md border border-white bg-black text-white shadow-sm">
+            <span className="grid h-9 w-9 place-items-center rounded-md border border-slate-200 bg-slate-950 text-white shadow-sm dark:border-white dark:bg-black">
               <BarChart3 className="h-5 w-5" />
             </span>
             <span className="leading-tight">
-              <span className="block text-base font-semibold tracking-tight text-white">IMS</span>
-              <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+              <span className="block text-base font-semibold tracking-tight text-slate-950 dark:text-white">IMS</span>
+              <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 dark:text-white/70">
                 Inventory Cloud
               </span>
             </span>
@@ -48,15 +48,15 @@ export function AuthShell({ title, description, children, footer }: AuthShellPro
 
           <div className="flex flex-1 flex-col justify-center">
             <div className="mx-auto w-full max-w-[360px]">
-              <h1 className="text-[1.7rem] font-semibold tracking-[-0.02em] text-white sm:text-[1.9rem]">
+              <h1 className="text-[1.7rem] font-semibold tracking-[-0.02em] text-slate-950 dark:text-white sm:text-[1.9rem]">
                 {title}
               </h1>
-              <p className="mt-2 text-sm leading-6 text-white/70">{description}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-500 dark:text-white/70">{description}</p>
             </div>
 
             <div className="mx-auto mt-7 w-full max-w-[360px]">{children}</div>
 
-            <p className="mx-auto mt-6 w-full max-w-[360px] text-center text-sm text-white/70">{footer}</p>
+            <p className="mx-auto mt-6 w-full max-w-[360px] text-center text-sm text-slate-500 dark:text-white/70">{footer}</p>
           </div>
         </div>
 
